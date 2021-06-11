@@ -12,7 +12,7 @@ namespace General.Input
         public event Action<InputAction.CallbackContext> Performed;
         public event Action<InputAction.CallbackContext> Canceled;
 
-        public bool IsPressed => action.phase == InputActionPhase.Started;
+        public bool IsPressed { get; private set; }
         public bool Triggered => action.triggered;
         private InputAction action;
 
@@ -20,8 +20,12 @@ namespace General.Input
         {
             this.action = property.action;
             action.started += ctx => Started?.Invoke(ctx);
+            action.started += ctx => IsPressed = true;
+            
             action.performed += ctx => Performed?.Invoke(ctx);
+            
             action.canceled += ctx => Canceled?.Invoke(ctx);
+            action.canceled += ctx => IsPressed = false;
         }
 
         public T ReadValue() => action.ReadValue<T>();

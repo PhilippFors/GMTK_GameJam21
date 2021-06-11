@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace General.Effects
+namespace Effects
 {
     public abstract class IEffectController : MonoBehaviour
     {

@@ -1,34 +1,31 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-namespace General.Effects
+
+namespace Effects
 {
-    /// <summary>
-    /// Used as a simple extension for Particle Systems for ease of use. Can be referenced in the EffectController.
-    /// </summary>
-
     [System.Serializable]
-    public class ParticleEffectController : IEffectController
+    public class SoundEffectController : IEffectController
     {
-        [SerializeField] private ParticleSystem particle;
-
-        public override void StopEffect()
-        {
-            particle.Stop();
-        }
+        [SerializeField] private AudioSource soundEffect;
 
         public override void PlayEffect()
         {
             if (PlayOnCommand)
             {
-                particle.Play();
+                soundEffect.Play();
             }
+        }
+
+        public override void StopEffect()
+        {
+            soundEffect.Stop();
         }
 
         public override void StopLoop()
         {
             throw new System.NotImplementedException();
         }
+
         protected override IEnumerator LoopEffect()
         {
             throw new System.NotImplementedException();
@@ -37,7 +34,9 @@ namespace General.Effects
         private void OnTriggerEnter(Collider other)
         {
             if (PlayOnCollision && Active)
-                PlayEffect();
+            {
+                soundEffect.Play();
+            }
         }
     }
 }

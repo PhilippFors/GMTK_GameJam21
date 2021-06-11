@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utilities
+namespace General.Utilities
 {
     /// <summary>
     /// Classes that need to be singletons can inherit from this class to avoid too much boilerplate code.

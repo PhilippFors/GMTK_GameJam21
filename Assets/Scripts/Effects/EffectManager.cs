@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace General.Effects
+namespace Effects
 {
     /// <summary>
-    /// Keeps reference to all Effects (SFX, VFX, Particle Systems) on an Object and is used for playing effects 
+    /// Keeps reference to all Effects (SFX, Particle Systems) on an object and is used for playing effects 
     /// </summary>
     public class EffectManager : MonoBehaviour
     {
