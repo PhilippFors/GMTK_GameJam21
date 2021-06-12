@@ -1,7 +1,18 @@
+using System;
 using UnityEngine;
 
-public abstract class EntityBase : MonoBehaviour
+namespace Entities
 {
-    public abstract void TakeDamage(float dmg);
-    public abstract void Heal(float value);
+    public abstract class EntityBase : MonoBehaviour
+    {
+        [SerializeField] protected float maxHealth;
+        protected float currentHealth;
+        public abstract void TakeDamage(float dmg);
+        public abstract void Heal(float value);
+        public abstract void OnDeath();
+        private void Awake()
+        {
+            currentHealth = maxHealth;
+        }
+    }
 }

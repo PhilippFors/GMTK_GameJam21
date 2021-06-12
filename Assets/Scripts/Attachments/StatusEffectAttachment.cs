@@ -1,11 +1,14 @@
+using Entities.Enemy;
 using UnityEngine;
 
 namespace Attachments
 {
-    [CreateAssetMenu]
-    public class StatusEffectAttachment : AttachmentBase
+    public abstract class StatusEffectAttachment : AttachmentBase
     {
-        [SerializeField] private StatusEffectType type;
+        public StatusEffectType StatusType => statusType;
+        [SerializeField] private StatusEffectType statusType;
+
+        public abstract void ApplyEffect(EnemyBase enemy);
     }
 
     public enum StatusEffectType
