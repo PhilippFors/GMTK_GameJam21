@@ -9,11 +9,14 @@ namespace Entities.Enemy.AI
         
         public void CheckTransitions(StateMachine stateMachine)
         {
-            foreach (Transition t in transitions)
+            if (transitions != null && transitions.Count > 0)
             {
-                if (t.Check(stateMachine))
+                foreach (Transition t in transitions)
                 {
-                    stateMachine.SwitchStates(t.NextState);
+                    if (t.Check(stateMachine))
+                    {
+                        stateMachine.SwitchStates(t.NextState);
+                    }
                 }
             }
         }
@@ -30,10 +33,12 @@ namespace Entities.Enemy.AI
         public virtual void OnStateExit(StateMachine stateMachine){}
     }
 
-    public abstract class Transition
+    [System.Serializable]
+    public abstract class Transition : ScriptableObject
     {
         public State NextState => nextState;
         [SerializeField] private State nextState;
+
         public abstract bool Check(StateMachine stateMachine);
     }
 }
