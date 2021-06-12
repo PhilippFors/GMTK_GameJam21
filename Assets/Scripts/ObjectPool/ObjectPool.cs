@@ -34,6 +34,24 @@ namespace ObjectPool
             obj.transform.parent = null;
             return obj;
         }
+        public List<T> GetObjects(int v)
+        {
+            List<T> l = new List<T>();
+            for (int i = 0; i < v; i++)
+            {
+                if (pool.Count == 0)
+                {
+                    l.Add(InstantiateObject(false));
+                    continue;
+                }
+
+                var obj = pool.Dequeue();
+                obj.transform.parent = null;
+                l.Add(obj);
+            }
+
+            return l;
+        }
 
         public void ReleaseObject(T obj)
         {

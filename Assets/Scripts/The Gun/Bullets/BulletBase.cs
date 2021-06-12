@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Attachments;
 using Attachments.DamageAttachments;
 using Entities.Enemy;
+using Entities.Player;
 using ObjectPool;
 using UnityEngine;
 
@@ -10,8 +11,9 @@ namespace TheGun.Bullets
     public class BulletBase : MonoBehaviour
     {
         [SerializeField] private float bulletSpeed;
+        private bool fromEnemy;
         private float damage;
-        private float maxExistTime = 2f;
+        private float maxExistTime = 3f;
         private float currentExistTime;
         private float baseMultiplier = 0.2f;
 
@@ -45,19 +47,27 @@ namespace TheGun.Bullets
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Enemy")
+            if (!fromEnemy)
             {
-                var enemy = other.GetComponent<EnemyBase>();
-                var dmg = damage * CalculateDamageMultiplier(enemy);
-                Debug.Log($"Damage: {dmg}");
-                enemy.TakeDamage(dmg);
-                DestroyBullet();
+                if (other.gameObject.tag == "Enemy")
+                {
+                    var enemy = other.GetComponent<EnemyBase>();
+                    var dmg = damage * CalculateDamageMultiplier(enemy);
+                    Debug.Log($"Damage: {dmg}");
+                    enemy.TakeDamage(dmg);
+                    DestroyBullet();
+                }
             }
-            //
-            // if (!other.GetComponent<BulletBase>())
-            // {
-            //     
-            // }
+            else
+            {
+                if (other.gameObject.tag == "Player")
+                {
+                    var player = other.GetComponent<PlayerBase>();
+                    Debug.Log($"Damage: {damage}");
+                    player.TakeDamage(damage);
+                    DestroyBullet();
+                }
+            }
         }
 
         private float CalculateDamageMultiplier(EnemyBase enemy)
@@ -100,6 +110,14 @@ namespace TheGun.Bullets
             this.magazineAttachment = magazineAttachment;
             transform.forward = forward;
         }
+        
+        public void Initialize(Vector3 forward, float dmg, float speed, bool fromEnemy)
+        {
+            this.fromEnemy = fromEnemy;
+            damage = dmg;
+            bulletSpeed = speed;
+            transform.forward = forward;
+        }
 
         private void MoveBullet()
         {
@@ -108,6 +126,7 @@ namespace TheGun.Bullets
 
         private void DestroyBullet()
         {
+            fromEnemy = false;
             currentExistTime = 0;
             BulletBasePool.Instance.ReleaseObject(this);
         }

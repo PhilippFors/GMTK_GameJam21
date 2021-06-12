@@ -6,25 +6,42 @@ namespace Entities.Enemy.AI
     public class StateMachine : MonoBehaviour
     {
         public NavMeshAgent NavMeshAgent => navMeshAgent;
-        public EnemyAttack AttackBehaviour => attackBehaviour;
+        public EnemyAttack EnemyAttack => enemyAttack;
         public EnemyBase EnemyBase => enemyBase;
         public Transform Player => player;
+        public Animator Animator => animator;
+
+        public float ObstacleAvoidDistance => obstacleAvoidDistance;
+        public float AngleIncrement => angleIncrement;
+        public int WhiskerAmount => whiskerAmount;
+        public float MainWhiskerLength => mainWhiskerLength;
+        public float SecondaryWhiskerLength => secondaryWhiskerLength;
         
+
         [SerializeField] private Transform player;
         [SerializeField] private bool isActive;
         [SerializeField] private State startState;
         [SerializeField] private Transition[] anyTransitions;
+
+        [Header("Obstacle avoidance")]
+        [SerializeField] private float obstacleAvoidDistance;
+        [SerializeField] private float angleIncrement;
+        [SerializeField] private int whiskerAmount;
+        [SerializeField] private float mainWhiskerLength;
+        [SerializeField] private float secondaryWhiskerLength;
         
-        private EnemyAttack attackBehaviour;
+        private EnemyAttack enemyAttack;
         private EnemyBase enemyBase;
         private NavMeshAgent navMeshAgent;
+        private Animator animator;
         private State currentState;
 
         private void Awake()
         {
-            attackBehaviour = GetComponent<EnemyAttack>();
+            enemyAttack = GetComponent<EnemyAttack>();
             navMeshAgent = GetComponent<NavMeshAgent>();
             enemyBase = GetComponent<EnemyBase>();
+            animator = GetComponentInChildren<Animator>();
         }
 
         private void Update()

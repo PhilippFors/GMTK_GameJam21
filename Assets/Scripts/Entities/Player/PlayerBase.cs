@@ -8,7 +8,8 @@ namespace Entities.Player
     {
         public override void TakeDamage(float dmg)
         {
-            
+            currentHealth -= dmg;
+            Debug.Log($"Player takes {dmg} damage");
         }
 
         public override void Heal(float value)
