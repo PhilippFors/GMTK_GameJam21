@@ -10,14 +10,7 @@ namespace LevelManager
 {
     public class Room : MonoBehaviour
     {
-        public struct SpawnWaves
-        {
-            public float heavySpawnRate;
-            public float fastSpawnRate;
-            public float enemyAmount;
-            public List<EnemyBase> currentEnemies;
-        }
-
+        
         private List<SpawnWaves> wavesList;
         public List<SpawnPoints> spawns;
         
@@ -44,10 +37,12 @@ namespace LevelManager
                     return;
                 }
                 //wave.currentEnemies.Add();
+                print("i am spawning");
             }
 
             foreach (var enemy in currentWave.currentEnemies)
             {
+               
                 Instantiate(enemy, spawns[Random.Range(0, spawns.Count - 1)].transform);
             }
         }
@@ -78,6 +73,7 @@ namespace LevelManager
                 SpawnEnemies();
                 waveCount++;
                 roomStarted = true;
+                LevelManager.Instance.currentRoom = this;
             }
         }
     }

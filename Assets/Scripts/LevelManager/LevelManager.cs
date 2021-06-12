@@ -15,22 +15,18 @@ namespace LevelManager
 
         private void Start()
         {
-            currentRoomNumber = 0;
-            currentRoom = Instantiate(roomList[currentRoomNumber], Vector3.zero, Quaternion.identity);
-            
+            //currentRoomNumber = 0;
+            //currentRoom = Instantiate(roomList[currentRoomNumber].gameObject, transform).GetComponent<Room>();
+
         }
 
         private void Update()
         {
-            if (currentRoomNumber == roomList.Count)
-            {
-                
-            }
             if (currentRoom.roomFinished)
             {
                 currentRoom.roomFinished = false;
-                currentRoomNumber++;
-                currentRoom = Instantiate(roomList[currentRoomNumber], Vector3.zero, Quaternion.identity);
+                //currentRoomNumber++;
+                //currentRoom = Instantiate(roomList[currentRoomNumber].gameObject, transform).GetComponent<Room>();
             }
         }
     }

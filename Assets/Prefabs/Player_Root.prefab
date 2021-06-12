@@ -1022,7 +1022,6 @@ GameObject:
   - component: {fileID: 1972919324127125395}
   - component: {fileID: 3789261837764966752}
   - component: {fileID: 5862214864126868160}
-  - component: {fileID: 8961613036635091411}
   m_Layer: 10
   m_Name: Player_Root
   m_TagString: Player
@@ -1224,31 +1223,6 @@ MonoBehaviour:
   - {fileID: 0}
   magazine:
   - {fileID: 11400000, guid: 3a07beae629f8f946b1e40ecbcabd41b, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  currentAttachments: []
---- !u!114 &8961613036635091411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1972919324127125394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb161f9f19f524462aaf9291049ec9f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  muzzle:
-  - {fileID: 11400000, guid: f28bf9ad7b1134d348fce6e63f6deb0e, type: 2}
-  - {fileID: 11400000, guid: 781fc23fa8b334772945b95cc4f8675e, type: 2}
-  - {fileID: 11400000, guid: 781fc23fa8b334772945b95cc4f8675e, type: 2}
-  status:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  magazine:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   currentAttachments: []
