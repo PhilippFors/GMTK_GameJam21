@@ -1,9 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Player.PlayerInput;
 
-namespace Player.PlayerInput
+namespace Player.Movement
 {
     public class PlayerMovementController : MonoBehaviour
     {
