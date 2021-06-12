@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Attachments.DamageAttachments
 {
+    [CreateAssetMenu]
     public class MagazineAttachment : DamageAttachment
     {
         public float FireRate => fireRate;
