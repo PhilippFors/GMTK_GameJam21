@@ -212,37 +212,15 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "59fc92ef-dde5-4eea-b359-931e0bacc94b",
-                    "path": "1DAxis",
+                    "name": "",
+                    "id": "ca630109-14a9-4db9-a6dd-69bdaf48c78a",
+                    "path": "<Mouse>/scroll/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Mousewheel",
-                    "isComposite": true,
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "adb8a5aa-6738-43cc-a966-852c5f26446b",
-                    "path": "<Mouse>/scroll/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Mousewheel",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "ac1c5a41-3588-424b-8345-6687ee27fdcf",
-                    "path": "<Mouse>/scroll/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Mousewheel",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         }

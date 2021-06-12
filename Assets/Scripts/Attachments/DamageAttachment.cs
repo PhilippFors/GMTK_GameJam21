@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Attachments
 {
+    [CreateAssetMenu]
     public class DamageAttachment : AttachmentBase
     {
         [SerializeField] private float dmgMultiplier;
