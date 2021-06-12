@@ -3,7 +3,7 @@ using General.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Player.PlayerInput
+namespace Entities.Player.PlayerInput
 {
     /// <summary>
     /// Contains all of the inputs the player can use.

@@ -1,7 +1,7 @@
-using Player.PlayerInput;
+using Entities.Player.PlayerInput;
 using UnityEngine;
 
-namespace Player
+namespace Entities.Player
 {
     public class CameraController : MonoBehaviour
     {

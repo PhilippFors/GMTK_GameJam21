@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public abstract class EntityBase : MonoBehaviour
+namespace Entities
 {
-    public abstract void TakeDamage(float dmg);
-    public abstract void Heal(float value);
+    public abstract class EntityBase : MonoBehaviour
+    {
+        public abstract void TakeDamage(float dmg);
+        public abstract void Heal(float value);
+    }
 }

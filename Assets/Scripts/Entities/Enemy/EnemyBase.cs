@@ -1,17 +1,20 @@
 using Attachments;
 using UnityEngine;
 
-public class EnemyBase : EntityBase
+namespace Entities.Enemy
 {
-    [SerializeField] private DamageType damageType;
-    
-    public override void TakeDamage(float dmg)
+    public class EnemyBase : EntityBase
     {
-        
-    }
+        [SerializeField] private DamageType damageType;
 
-    public override void Heal(float value)
-    {
-        
+        public override void TakeDamage(float dmg)
+        {
+
+        }
+
+        public override void Heal(float value)
+        {
+
+        }
     }
 }
