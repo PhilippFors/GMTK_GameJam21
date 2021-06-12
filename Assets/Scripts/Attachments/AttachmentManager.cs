@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Attachments;
-using Player.PlayerInput;
+using Entities.Player.PlayerInput;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using AttachmentBase = System.Net.Mail.AttachmentBase;
@@ -17,26 +17,29 @@ namespace Attachments
 
         public List<AttachmentBase> currentAttachments = new List<AttachmentBase>();
         public Action<int, int> OnAttachmentSwitch;
-    
+
 
         public DamageAttachment CurrentMuzzle
         {
             get => muzzle[muzzleCount];
             set => currentAttachments[0] = value;
         }
-       
+
         public StatusEffectAttachment CurrentStatus
         {
             get => status[statusCount];
             set => currentAttachments[1] = value;
         }
+
         public DamageAttachment CurrentMagazine
         {
             get => magazine[magazineCount];
             set => currentAttachments[2] = value;
         }
 
-        int muzzleCount = 0; int statusCount = 0; int magazineCount = 0; 
+        int muzzleCount = 0;
+        int statusCount = 0;
+        int magazineCount = 0;
 
         // Start is called before the first frame update
         void Start()
@@ -45,7 +48,6 @@ namespace Attachments
             currentAttachments.Add(status[0]);
             currentAttachments.Add(magazine[0]);
             PlayerInputController.Instance.Mousewheel.Performed += ChangeAttachment;
-
         }
 
         public void ChangeAttachment(InputAction.CallbackContext ctx)
@@ -59,7 +61,6 @@ namespace Attachments
                 {*/
                 CurrentMuzzle = muzzle[muzzleCount];
                 //}
-
             }
             else if (PlayerInputController.Instance.Attachment2.IsPressed)
             {
@@ -69,18 +70,13 @@ namespace Attachments
                 {*/
                 CurrentStatus = status[statusCount];
                 //}
-               
             }
             else if (PlayerInputController.Instance.Attachment3.IsPressed)
             {
                 magazineCount = checkValue(magazineCount, z);
-                /*if (CurrentMagazine is { } && CurrentMagazine != magazine[magazineCount])
-                {
-                    CurrentMagazine = magazine[magazineCount];
-                }*/
-                
+                ChangeAttachmentInRenderer(2, magazineCount);
+                CurrentMagazine = magazine[magazineCount];
             }
-
         }
 
         public int checkValue(int i, float z)
@@ -89,7 +85,7 @@ namespace Attachments
                 ++i;
             else if (z < 0)
                 --i;
-                
+
             if (i > 2)
             {
                 i = 0;
@@ -99,7 +95,7 @@ namespace Attachments
             {
                 i = 2;
             }
-            
+
             return i;
         }
 
