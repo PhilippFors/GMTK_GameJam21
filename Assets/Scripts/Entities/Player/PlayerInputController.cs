@@ -19,6 +19,7 @@ namespace Player.PlayerInput
         public InputActionData<float> Attachment1 => attachment1 ?? (attachment1 = new InputActionData<float>(attachment1Action));
         public InputActionData<float> Attachment2 => attachment2 ?? (attachment2 = new InputActionData<float>(attachment2Action));
         public InputActionData<float> Attachment3 => attachment3 ?? (attachment3 = new InputActionData<float>(attachment3Action));
+        public InputActionData<float> Mousewheel => mouswheel ?? (mouswheel = new InputActionData<float>(mousewheelAction));
 
         [SerializeField] private InputActionAsset inputActions;
 
@@ -30,7 +31,8 @@ namespace Player.PlayerInput
         [SerializeField] private InputActionProperty attachment1Action;
         [SerializeField] private InputActionProperty attachment2Action;
         [SerializeField] private InputActionProperty attachment3Action;
-
+        [SerializeField] private InputActionProperty mousewheelAction;
+        
         private InputActionData<float> dash;
         private InputActionData<Vector2> movement;
         private InputActionData<Vector2> mousePointer;
@@ -39,6 +41,7 @@ namespace Player.PlayerInput
         private InputActionData<float> attachment1;
         private InputActionData<float> attachment2;
         private InputActionData<float> attachment3;
+        private InputActionData<float> mouswheel;
 
         private void OnEnable()
         {
