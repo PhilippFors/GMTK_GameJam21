@@ -6,24 +6,22 @@ namespace Player.Movement
     public class PlayerMovementController : MonoBehaviour
     {
         [SerializeField] private float movementSpeed;
-        [SerializeField] private LayerMask groundedMask;
-        
+
         [Header("Grounded settings")]
+        [SerializeField] private LayerMask groundedMask;
         [SerializeField] private float checkSphereYPos;
         [SerializeField] private float checkSphereRadius;
-
-        private Camera mainCam;
-        private CharacterController characterController;
+        
         private Vector2 MovementDir => PlayerInputController.Instance.Movement.ReadValue();
         private Vector2 MousePointer => PlayerInputController.Instance.MousePointer.ReadValue();
         private Vector3 velocity;
         private Vector3 currentMoveDirection;
+        private Camera mainCam;
         private bool isDashing;
         private bool isGrounded;
 
         private void Awake()
         {
-            characterController = GetComponent<CharacterController>();
             mainCam = Camera.main;
             PlayerInputController.Instance.Dash.Performed += ctx => Dash();
         }
@@ -42,7 +40,7 @@ namespace Player.Movement
         
         private void Move()
         {
-            characterController.Move((currentMoveDirection + velocity).normalized * (movementSpeed * Time.deltaTime));
+            transform.position += (currentMoveDirection + velocity).normalized * (movementSpeed * Time.deltaTime);
 
             var move = MovementDir;
             var direction = new Vector3(move.x, 0, move.y);
@@ -81,8 +79,6 @@ namespace Player.Movement
                 var rayPoint = cameraRay.GetPoint(rayLength);
                 pointToLook = rayPoint - transform.position;
             }
-
-            pointToLook.y = 0;
 
             if (pointToLook.magnitude > 0.0001)
             {

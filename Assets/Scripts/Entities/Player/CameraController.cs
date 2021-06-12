@@ -8,7 +8,7 @@ namespace Player
         [SerializeField] private Transform objectToFollow;
         [SerializeField] private bool useLerp = true;
         [SerializeField] private float cameraFollowSpeed = 9f;
-        [SerializeField] private float targetBias = 0.2f;
+        [SerializeField] private float targetBias = 0.1f;
         
         private Camera mainCam;
         private Vector2 MousePointer => PlayerInputController.Instance.MousePointer.ReadValue();
