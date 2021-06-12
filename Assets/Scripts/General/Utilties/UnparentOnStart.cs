@@ -10,6 +10,7 @@ namespace General.Utilities
       private void Awake()
       {
          transform.DetachChildren();
+         Destroy(this.gameObject);
       }
    }
 }
