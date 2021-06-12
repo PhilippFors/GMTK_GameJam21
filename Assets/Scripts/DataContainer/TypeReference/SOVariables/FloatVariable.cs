@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace DataContainer.Variables
+namespace DataContainer.TypeReference.SOVariables
 {
     [CreateAssetMenu]
-    public class FloatVariable : SOVariable<float>
+    public class FloatVariable : ScriptableObjectVariable<float>
     {
     }
 }

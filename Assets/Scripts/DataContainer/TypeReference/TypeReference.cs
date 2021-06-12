@@ -1,9 +1,13 @@
-﻿using DataContainer.Variables;
+﻿using DataContainer.TypeReference.SOVariables;
 using NaughtyAttributes;
 using UnityEngine;
 
 namespace DataContainer.TypeReference
 {
+    /// <summary>
+    /// Can be used to store either a type variable or a custom local value.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     [System.Serializable]
     public abstract class TypeReference<T>
     {
@@ -15,7 +19,7 @@ namespace DataContainer.TypeReference
 
         [SerializeField,
          DisableIf("useLocalValue"), AllowNesting]
-        private SOVariable<T> variable;
+        private ScriptableObjectVariable<T> variable;
 
         public T Value
         {

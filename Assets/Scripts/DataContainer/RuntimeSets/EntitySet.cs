@@ -4,6 +4,10 @@ using UnityEngine.Assertions;
 
 namespace DataContaner.RuntimeSets
 {
+    /// <summary>
+    /// Can contain anything at runtime and can be share across multiple classes.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class EntitySet<T> : ScriptableObject
     {
         private List<T> entityList = new List<T>();
