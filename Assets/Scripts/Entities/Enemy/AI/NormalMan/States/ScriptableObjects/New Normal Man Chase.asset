@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22bfddda86ee4a845a0c1b50bc3e8e91, type: 3}
   m_Name: New Normal Man Chase
   m_EditorClassIdentifier: 
-  transitions: []
+  transitions:
+  - {fileID: 11400000, guid: 07b5b2bc098b6f94099be02c0ed3067c, type: 2}

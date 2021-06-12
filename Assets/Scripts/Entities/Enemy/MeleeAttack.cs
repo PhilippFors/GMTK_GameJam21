@@ -18,6 +18,8 @@ namespace Entities.Enemy
             if (canDamage & attackCollider.Player != null)
             {
                 attackCollider.Player.GetComponent<PlayerBase>().TakeDamage(Damage);
+                Debug.Log($"Player recieves {Damage} damage");
+                return true;
             }
 
             return false;
@@ -25,6 +27,7 @@ namespace Entities.Enemy
         
         protected IEnumerator StartAttackTiming(float startDamageFrame, float stopDamageFrame, float clipLength = 0)
         {
+            ResetTimer();
             float start;
             if (startDamageFrame != 0)
                 start = startDamageFrame / 60;
@@ -49,13 +52,15 @@ namespace Entities.Enemy
             while (cTime <= wait)
             {
                 if (DoDamage())
+                {
                     yield break;
+                }
 
                 cTime += Time.deltaTime;
                 yield return null;
             }
         }
 
-        public abstract void Attack();
+        public override void Attack(){}
     }
 }
