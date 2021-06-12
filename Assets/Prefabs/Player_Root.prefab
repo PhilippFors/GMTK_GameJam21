@@ -1022,6 +1022,7 @@ GameObject:
   - component: {fileID: 1972919324127125395}
   - component: {fileID: 3789261837764966752}
   - component: {fileID: 5862214864126868160}
+  - component: {fileID: 8176238102398365912}
   m_Layer: 10
   m_Name: Player_Root
   m_TagString: Player
@@ -1226,6 +1227,24 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currentAttachments: []
+--- !u!143 &8176238102398365912
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972919324127125394}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1972919324904198117
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,8 +1441,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachmentObject: {fileID: 1079715565}
-  muzzleObjects: []
-  statusObjects: []
-  magazineObjects: []
+  muzzleObjects:
+  - {fileID: 0}
+  statusObjects:
+  - {fileID: 0}
+  magazineObjects:
+  - {fileID: 0}
   activeObjects: []
   shouldRotate: 0

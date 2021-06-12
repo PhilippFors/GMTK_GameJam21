@@ -5,6 +5,8 @@ namespace Entities.Player.Movement
 {
     public class PlayerMovementController : MonoBehaviour
     {
+        public Vector3 CurrentVelocity { get; private set; }
+
         [SerializeField] private float movementSpeed;
 
         [Header("Grounded settings")]
@@ -19,15 +21,19 @@ namespace Entities.Player.Movement
         private Camera mainCam;
         private bool isDashing;
         private bool isGrounded;
-
+        private CharacterController characterController;
+        private Vector3 oldPos;
         private void Awake()
         {
+            oldPos = transform.position;
             mainCam = Camera.main;
+            characterController = GetComponent<CharacterController>();
             PlayerInputController.Instance.Dash.Performed += ctx => Dash();
         }
         
         private void Update()
         {
+            CurrentVelocity = transform.position - oldPos;
             IsGrounded();
             Move();
             UpdateLookDirection();
@@ -40,7 +46,7 @@ namespace Entities.Player.Movement
         
         private void Move()
         {
-            transform.position += (currentMoveDirection + velocity).normalized * (movementSpeed * Time.deltaTime);
+            characterController.Move((currentMoveDirection + velocity).normalized * (movementSpeed * Time.deltaTime));
 
             var move = MovementDir;
             var direction = new Vector3(move.x, 0, move.y);

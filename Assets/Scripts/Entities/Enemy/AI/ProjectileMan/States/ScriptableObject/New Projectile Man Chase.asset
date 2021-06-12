@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab27f2638cba50c4785b1f274ddad3d5, type: 3}
   m_Name: New Projectile Man Chase
   m_EditorClassIdentifier: 
-  transitions: []
-  lineOfSightMask:
-    serializedVersion: 2
-    m_Bits: 1025
+  transitions:
+  - {fileID: 11400000, guid: db970fd4a9d753f4da36874aa2be7fa7, type: 2}
   minDistance: 6
   maxDistance: 11
   findNewPointDistance: 15

@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa93bf3641a45d4fbc27302d44155e2, type: 3}
   m_Name: New Projectile Man Attack State
   m_EditorClassIdentifier: 
-  transitions: []
+  transitions:
+  - {fileID: 11400000, guid: db970fd4a9d753f4da36874aa2be7fa7, type: 2}
+  lineOfSightMask:
+    serializedVersion: 2
+    m_Bits: 524288
