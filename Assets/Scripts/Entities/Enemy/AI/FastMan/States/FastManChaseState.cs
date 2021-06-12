@@ -1,10 +1,8 @@
-using DG.Tweening;
 using UnityEngine;
 
-namespace Entities.Enemy.AI.NormalMan
+namespace Entities.Enemy.AI.FastMan.States
 {
-    [CreateAssetMenu(menuName = "AI/Normal Man/States/Chase")]
-    public class NormalManChaseState : State
+    public class FastManChaseState : State
     {
         public override void Tick(StateMachine stateMachine)
         {

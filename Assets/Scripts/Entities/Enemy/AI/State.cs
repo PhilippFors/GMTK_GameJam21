@@ -7,7 +7,7 @@ namespace Entities.Enemy.AI
     {
         [SerializeField] private List<Transition> transitions;
         
-        public void CheckTransitions(StateMachine stateMachine)
+        private void CheckTransitions(StateMachine stateMachine)
         {
             if (transitions != null && transitions.Count > 0)
             {
@@ -15,7 +15,11 @@ namespace Entities.Enemy.AI
                 {
                     if (t.Check(stateMachine))
                     {
-                        stateMachine.SwitchStates(t.NextState);
+                        stateMachine.SwitchStates(t.TrueState);
+                    }
+                    else
+                    {
+                        stateMachine.SwitchStates(t.FalseState);
                     }
                 }
             }
@@ -36,8 +40,10 @@ namespace Entities.Enemy.AI
     [System.Serializable]
     public abstract class Transition : ScriptableObject
     {
-        public State NextState => nextState;
-        [SerializeField] private State nextState;
+        public State TrueState => trueState;
+        public State FalseState => falseState;
+        [SerializeField] private State trueState;
+        [SerializeField] private State falseState;
 
         public abstract bool Check(StateMachine stateMachine);
     }

@@ -51,12 +51,13 @@ namespace TheGun.Bullets
                 var dmg = damage * CalculateDamageMultiplier(enemy);
                 Debug.Log($"Damage: {dmg}");
                 enemy.TakeDamage(dmg);
-            }
-
-            if (!other.GetComponent<BulletBase>())
-            {
                 DestroyBullet();
             }
+            //
+            // if (!other.GetComponent<BulletBase>())
+            // {
+            //     
+            // }
         }
 
         private float CalculateDamageMultiplier(EnemyBase enemy)

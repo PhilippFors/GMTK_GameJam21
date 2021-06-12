@@ -43,5 +43,11 @@ namespace Entities.Enemy
                 canAttack = false;
             }
         }
+
+        protected void ResetTimer()
+        {
+            currentTimer -= attackTime;
+        }
+        public abstract void Attack();
     }
 }

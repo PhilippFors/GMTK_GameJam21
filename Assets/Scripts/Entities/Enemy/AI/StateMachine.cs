@@ -57,14 +57,14 @@ namespace Entities.Enemy.AI
             {
                 if (transition.Check(this))
                 {
-                    SwitchStates(transition.NextState);
+                    SwitchStates(transition.TrueState);
                 }
             }
         }
         
         public void SwitchStates(State nextState)
         {
-            if (nextState != null)
+            if (nextState != null && nextState != currentState)
             {
                 currentState.OnStateExit(this);
                 currentState = nextState;
