@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 575591649}
   - component: {fileID: 575591648}
   - component: {fileID: 575591647}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 632846118}
   - component: {fileID: 632846117}
   - component: {fileID: 632846116}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,9 +548,8 @@ GameObject:
   - component: {fileID: 1942660973}
   - component: {fileID: 1942660972}
   - component: {fileID: 1942660971}
-  - component: {fileID: 1942660970}
   - component: {fileID: 1942660969}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player_Root
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -570,24 +569,6 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!143 &1942660970
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942660968}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1942660971
 MonoBehaviour:
@@ -706,7 +687,7 @@ MonoBehaviour:
   groundedMask:
     serializedVersion: 2
     m_Bits: 1
-  checkSphereYPos: -0.5
+  checkSphereYPos: -0.49
   checkSphereRadius: 0.5
 --- !u!4 &1942660973
 Transform:
@@ -748,27 +729,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8770035149851692273, guid: 060c2594a70baca4c858bbe52db51a28, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9727716
+      value: 0.85286856
       objectReference: {fileID: 0}
     - target: {fileID: 8770035149851692273, guid: 060c2594a70baca4c858bbe52db51a28, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.082882896
+      value: 0.4924039
       objectReference: {fileID: 0}
     - target: {fileID: 8770035149851692273, guid: 060c2594a70baca4c858bbe52db51a28, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.21565816
+      value: -0.1503838
       objectReference: {fileID: 0}
     - target: {fileID: 8770035149851692273, guid: 060c2594a70baca4c858bbe52db51a28, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.018374685
+      value: 0.08682413
       objectReference: {fileID: 0}
     - target: {fileID: 8770035149851692273, guid: 060c2594a70baca4c858bbe52db51a28, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 9.74
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8770035149851692273, guid: 060c2594a70baca4c858bbe52db51a28, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -25
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 8770035149851692273, guid: 060c2594a70baca4c858bbe52db51a28, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

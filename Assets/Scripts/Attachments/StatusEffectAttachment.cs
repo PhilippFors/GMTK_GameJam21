@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Attachments
 {
-    public class StatusEffectAttachment : ScriptableObject, IAttachment
+    public class StatusEffectAttachment : AttachmentBase
     {
         [SerializeField] private StatusEffectType type;
     }

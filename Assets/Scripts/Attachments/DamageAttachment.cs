@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Attachments
 {
-    public class DamageAttachment : ScriptableObject, IAttachment
+    public class DamageAttachment : AttachmentBase
     {
         [SerializeField] private float dmgMultiplier;
         [SerializeField] private DamageType damageType;
@@ -12,6 +12,7 @@ namespace Attachments
     {
         red,
         blue,
-        green
+        green,
+        player
     }
 }
