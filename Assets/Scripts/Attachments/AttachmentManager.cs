@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Attachments;
+using Attachments.DamageAttachments;
 using Entities.Player.PlayerInput;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,15 +12,15 @@ namespace Attachments
 {
     public class AttachmentManager : MonoBehaviour
     {
-        public List<DamageAttachment> muzzle;
+        public List<MuzzleAttachment> muzzle;
         public List<StatusEffectAttachment> status;
-        public List<DamageAttachment> magazine;
+        public List<MagazineAttachment> magazine;
 
         public List<AttachmentBase> currentAttachments = new List<AttachmentBase>();
         public Action<int, int> OnAttachmentSwitch;
 
 
-        public DamageAttachment CurrentMuzzle
+        public MuzzleAttachment CurrentMuzzle
         {
             get => muzzle[muzzleCount];
             set => currentAttachments[0] = value;
@@ -31,7 +32,7 @@ namespace Attachments
             set => currentAttachments[1] = value;
         }
 
-        public DamageAttachment CurrentMagazine
+        public MagazineAttachment CurrentMagazine
         {
             get => magazine[magazineCount];
             set => currentAttachments[2] = value;

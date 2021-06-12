@@ -13,6 +13,7 @@ namespace TheGun.Bullets
         private float damage;
         private float maxExistTime = 2f;
         private float currentExistTime;
+        private float baseMultiplier = 0.2f;
 
         private List<DamageAttachment> damageAttachments
         {
@@ -28,7 +29,7 @@ namespace TheGun.Bullets
         private MagazineAttachment magazineAttachment;
         private MuzzleAttachment muzzleAttachment;
         private StatusEffectAttachment statusEffectAttachment;
-        
+
         private void Update()
         {
             MoveBullet();
@@ -51,22 +52,31 @@ namespace TheGun.Bullets
                 Debug.Log($"Damage: {dmg}");
                 enemy.TakeDamage(dmg);
             }
-            
-            DestroyBullet();
+
+            if (!other.GetComponent<BulletBase>())
+            {
+                DestroyBullet();
+            }
         }
 
         private float CalculateDamageMultiplier(EnemyBase enemy)
         {
-            float tempMultiplier = 0;
-            
+            float tempMultiplier = baseMultiplier;
+            var resistances = enemy.DamageResistances;
+
             foreach (DamageAttachment att in damageAttachments)
             {
-                if (enemy.DamageType == att.DamageType)
+                tempMultiplier += att.DmgMultiplier;
+            }
+
+            foreach (DamageAttachment att in damageAttachments)
+            {
+                if (enemy.DamageType != att.DamageType)
                 {
-                    tempMultiplier += att.DmgMultiplier;
+                    tempMultiplier *= 1 - resistances.Find(x => x.DamageType == att.DamageType).Resistance;
                 }
             }
-            
+
             Debug.Log($" Multiplier: {tempMultiplier}");
             return tempMultiplier;
         }
@@ -78,16 +88,18 @@ namespace TheGun.Bullets
                 statusEffectAttachment.ApplyEffect(enemy);
             }
         }
-        
-        public void Initialize(Vector3 forward, float dmg, StatusEffectAttachment statusEffectAttachment, MuzzleAttachment muzzleAttachment, MagazineAttachment magazineAttachment)
+
+        public void Initialize(Vector3 forward, float dmg, StatusEffectAttachment statusEffectAttachment,
+            MuzzleAttachment muzzleAttachment, MagazineAttachment magazineAttachment)
         {
             damage = dmg;
+            bulletSpeed = muzzleAttachment.BulletSpeed;
             this.statusEffectAttachment = statusEffectAttachment;
             this.muzzleAttachment = muzzleAttachment;
             this.magazineAttachment = magazineAttachment;
             transform.forward = forward;
         }
-        
+
         private void MoveBullet()
         {
             transform.position += transform.forward * bulletSpeed * Time.deltaTime;

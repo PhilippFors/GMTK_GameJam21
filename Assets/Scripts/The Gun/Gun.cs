@@ -1,6 +1,4 @@
-using System.Xml.Schema;
 using Attachments;
-using Attachments.DamageAttachments;
 using Entities.Player.PlayerInput;
 using ObjectPool;
 using UnityEngine;
@@ -9,15 +7,13 @@ namespace TheGun
 {
     public class Gun : MonoBehaviour
     {
-        [SerializeField] private MuzzleAttachment muzzleAtt;
-        [SerializeField] private MagazineAttachment magazineAtt;
-        [SerializeField] private StatusEffectAttachment statusEffectAttachment;
+        [SerializeField] private AttachmentManager attachmentManager;
         [SerializeField] private float baseDmg = 5f;
         [SerializeField] private bool isSemiAuto;
         [SerializeField] private Transform bulletSpawnPoint;
         
         private bool IsLMBPressed => PlayerInputController.Instance.LeftMouseButton.IsPressed;
-        private float shootTimer;
+        private float fireRate;
         private float currentTimer = 0;
         private bool canShoot;
 
@@ -28,7 +24,7 @@ namespace TheGun
 
         private void Update()
         {
-            shootTimer = 1f / magazineAtt.FireRate;
+            fireRate = 1f / attachmentManager.CurrentMagazine.FireRate;
             ShootAuto();
             ShootTimer();
         }
@@ -37,7 +33,7 @@ namespace TheGun
         {
             if (isSemiAuto && canShoot)
             {
-                currentTimer -= shootTimer;
+                currentTimer -= fireRate;
                 ShootBullet();
             }
         }
@@ -47,13 +43,14 @@ namespace TheGun
             if (!isSemiAuto && IsLMBPressed && canShoot)
             {
                 Debug.Log("Shoot auto");
+                currentTimer -= fireRate;
                 ShootBullet();
             }
         }
 
         private void ShootTimer()
         {
-            if (currentTimer >= shootTimer)
+            if (currentTimer >= fireRate)
             {
                 if (!canShoot)
                 {
@@ -77,7 +74,7 @@ namespace TheGun
             var bullet = BulletBasePool.Instance.GetObject();
             bullet.transform.position = bulletSpawnPoint.position;
             bullet.gameObject.SetActive(true);
-            bullet.Initialize(bulletSpawnPoint.forward, baseDmg, statusEffectAttachment, muzzleAtt, magazineAtt);
+            bullet.Initialize(bulletSpawnPoint.forward, baseDmg,attachmentManager.CurrentStatus, attachmentManager.CurrentMuzzle, attachmentManager.CurrentMagazine);
         }
     }
 }
