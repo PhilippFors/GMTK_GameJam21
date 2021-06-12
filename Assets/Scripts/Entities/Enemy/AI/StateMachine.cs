@@ -5,10 +5,18 @@ namespace Entities.Enemy.AI
 {
     public class StateMachine : MonoBehaviour
     {
+        public NavMeshAgent NavMeshAgent => navMeshAgent;
+        public EnemyAttack AttackBehaviour => attackBehaviour;
+        public EnemyBase EnemyBase => enemyBase;
+        public Transform Player => player;
+        
+        [SerializeField] private Transform player;
         [SerializeField] private bool isActive;
         [SerializeField] private State startState;
         [SerializeField] private Transition[] anyTransitions;
+        
         private EnemyAttack attackBehaviour;
+        private EnemyBase enemyBase;
         private NavMeshAgent navMeshAgent;
         private State currentState;
 
@@ -16,6 +24,7 @@ namespace Entities.Enemy.AI
         {
             attackBehaviour = GetComponent<EnemyAttack>();
             navMeshAgent = GetComponent<NavMeshAgent>();
+            enemyBase = GetComponent<EnemyBase>();
         }
 
         private void Update()
@@ -32,7 +41,6 @@ namespace Entities.Enemy.AI
             }
             
             currentState.StateUpdate(this);
-            
         }
 
         public void EnableAI(bool value)
