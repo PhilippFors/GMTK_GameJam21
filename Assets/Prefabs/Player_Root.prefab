@@ -1057,7 +1057,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ed04e885d83f643ba6673fe0221ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 8
+  mainMovementSpeed: 8
+  dashSpeed: 50
+  dashRechargeTime: 0.5
+  dashDuration: 0.1
   groundedMask:
     serializedVersion: 2
     m_Bits: 1
@@ -1175,6 +1178,17 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
     m_Reference: {fileID: -8696253412779110652, guid: e95c19f55bf64264192c7ed060d503c9, type: 3}
+  changeSlotAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Change Slot
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e7529b56-0db7-4bee-aa8f-01c9dbbc34cb
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+    m_Reference: {fileID: 339698480672471936, guid: e95c19f55bf64264192c7ed060d503c9, type: 3}
 --- !u!136 &1972919324127125395
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1216,17 +1230,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle:
   - {fileID: 11400000, guid: 49f63efce3197984f9ad1d7fe1e60c58, type: 2}
-  - {fileID: 11400000, guid: 781fc23fa8b334772945b95cc4f8675e, type: 2}
-  - {fileID: 11400000, guid: 781fc23fa8b334772945b95cc4f8675e, type: 2}
+  - {fileID: 11400000, guid: 85262ca949692194383ab2f4424c2323, type: 2}
+  - {fileID: 11400000, guid: 6d4627c8355150549b3c71718ecf51f4, type: 2}
   status:
   - {fileID: 11400000, guid: c4c44c90ceca0754286256c5a590438b, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 409965e3ea8a06248870bd6960659dd6, type: 2}
+  - {fileID: 11400000, guid: 5e5af64d3e0f211469e8518933e58e22, type: 2}
   magazine:
   - {fileID: 11400000, guid: 3a07beae629f8f946b1e40ecbcabd41b, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: f8f6c04aa9c9f084baee35b7de3a220d, type: 2}
+  - {fileID: 11400000, guid: 72a757f81abab4548a898a962311513f, type: 2}
   currentAttachments: []
+  attachmentUI: {fileID: 0}
 --- !u!143 &8176238102398365912
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1242,7 +1257,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1972919324904198117
