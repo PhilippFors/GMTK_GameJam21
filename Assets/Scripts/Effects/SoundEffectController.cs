@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Effects
@@ -7,6 +8,13 @@ namespace Effects
     public class SoundEffectController : IEffectController
     {
         [SerializeField] private AudioSource soundEffect;
+        [SerializeField] private bool playOnStartup;
+
+        private void Start()
+        {
+            soundEffect.loop = loop;
+            PlayEffect();
+        }
 
         public override void PlayEffect()
         {
@@ -23,12 +31,12 @@ namespace Effects
 
         public override void StopLoop()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         protected override IEnumerator LoopEffect()
         {
-            throw new System.NotImplementedException();
+            yield break;
         }
 
         private void OnTriggerEnter(Collider other)

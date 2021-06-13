@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: New Magazine Attachment
   m_EditorClassIdentifier: 
   damageType: 0
-  dmgMultiplier: 0.8
-  fireRate: 6
+  attachmentID: {fileID: 0}
+  uiSprite: {fileID: 21300000, guid: 398138c4b623f3f48ac981a9389e7c11, type: 3}
+  dmgMultiplier: 0.5
+  fireRate: 12

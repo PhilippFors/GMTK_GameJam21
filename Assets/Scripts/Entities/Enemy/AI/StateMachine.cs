@@ -42,6 +42,10 @@ namespace Entities.Enemy.AI
             navMeshAgent = GetComponent<NavMeshAgent>();
             enemyBase = GetComponent<EnemyBase>();
             animator = GetComponentInChildren<Animator>();
+            if (player == null)
+            {
+                player = GameObject.FindGameObjectWithTag("Player").transform;
+            }
         }
 
         private void Update()

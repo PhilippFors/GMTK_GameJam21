@@ -76,6 +76,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "SwitchSlot",
+                    "type": "Button",
+                    "id": "d8bba275-e93a-49d9-b48b-3fed0f51799b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -219,6 +227,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Mousewheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e89089d-965e-48e8-8543-0eaf66d77312",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard_mouse",
+                    "action": "SwitchSlot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
