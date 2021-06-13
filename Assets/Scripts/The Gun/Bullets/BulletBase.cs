@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Attachments;
 using Attachments.DamageAttachments;
+using Effects;
 using Entities.Enemy;
 using Entities.Player;
 using Entities.Player.PlayerInput;
@@ -18,6 +19,8 @@ namespace TheGun.Bullets
         private float maxExistTime = 3f;
         private float currentExistTime;
         private float baseMultiplier = 0.2f;
+        [SerializeField] private SoundEffectController prefab;
+        [SerializeField] private AudioClip impactSFX;
         public AttachmentManager manager => PlayerInputController.Instance.GetComponent<AttachmentManager>();
         public TrailRenderer a => GetComponent<TrailRenderer>();
        
@@ -107,6 +110,14 @@ namespace TheGun.Bullets
                     player.TakeDamage(damage);
                     DestroyBullet();
                 }
+            }
+            
+            if (muzzleAttachment != null && muzzleAttachment.DamageType == DamageType.red)
+            {
+                var p = Instantiate(prefab);
+                p.transform.parent = null;
+                p.SetEffect(impactSFX);
+                p.PlayEffect();
             }
         }
 

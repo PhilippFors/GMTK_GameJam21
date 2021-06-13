@@ -12,8 +12,8 @@ namespace TheGun
         [SerializeField] private float baseDmg = 5f;
         [SerializeField] private bool isSemiAuto;
         [SerializeField] private Transform bulletSpawnPoint;
-        
-        
+
+        [SerializeField] private Animator animator;
         private bool IsLMBPressed => PlayerInputController.Instance.LeftMouseButton.IsPressed;
         private float fireRate;
         private float currentTimer = 0;
@@ -23,7 +23,7 @@ namespace TheGun
         private void Awake()
         {
             PlayerInputController.Instance.LeftMouseButton.Started += ctx => ShootSemi();
-            
+            PlayerInputController.Instance.LeftMouseButton.Canceled += ctx => animator.SetLayerWeight(1, 0);
         }
 
         private void Update()
@@ -74,6 +74,9 @@ namespace TheGun
 
         private void ShootBullet()
         {
+            animator.SetLayerWeight(1, 1);
+            animator.Play("Shoot");
+            
             sfx.PlayEffect();
             var bullet = BulletBasePool.Instance.GetObject();
             bullet.transform.position = bulletSpawnPoint.position;

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 1
   attachmentID: {fileID: 0}
-  uiSprite: {fileID: 21300000, guid: 7cbd3d4bb308c1f43bb631a2aab05a2e, type: 3}
+  uiSprite: {fileID: 21300000, guid: 7b6df5b7a7b2f484ab38f641c057525e, type: 3}
   dmgMultiplier: 0.7
   bulletSpeed: 40
+  sfx: {fileID: 8300000, guid: 086b9bb138cbb6e4494314e3594b784c, type: 3}

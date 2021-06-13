@@ -19,7 +19,6 @@ namespace Entities.Player.Movement
         [SerializeField] private LayerMask groundedMask;
         [SerializeField] private float checkSphereYPos;
         [SerializeField] private float checkSphereRadius;
-        
         private Vector2 MovementDir => PlayerInputController.Instance.Movement.ReadValue();
         private Vector2 MousePointer => PlayerInputController.Instance.MousePointer.ReadValue();
         private Vector3 velocity;
@@ -41,6 +40,8 @@ namespace Entities.Player.Movement
             mainCam = Camera.main;
             characterController = GetComponent<CharacterController>();
             PlayerInputController.Instance.Dash.Performed += ctx => StartDash();
+            PlayerInputController.Instance.Movement.Performed += ctx => GetComponentInChildren<Animator>().SetBool("isRunning", true);
+            
         }
         
         private void Update()
@@ -50,6 +51,10 @@ namespace Entities.Player.Movement
             UpdateLookDirection();
             DashCooldown();
             CurrentVelocity = transform.position - oldPos;
+            if (PlayerInputController.Instance.Movement.ReadValue() == Vector2.zero)
+            {
+                GetComponentInChildren<Animator>().SetBool("isRunning", false);
+            }
         }
 
         private void DashCooldown()
