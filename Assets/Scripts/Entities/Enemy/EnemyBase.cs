@@ -52,6 +52,7 @@ namespace Entities.Enemy
                 // TODO: Play particle effect
             }
 
+            LevelManager.LevelManager.Instance.instantiatedEnemies.Remove(gameObject);
             // TODO: Play death animation
             Destroy(gameObject);
         }
