@@ -120,22 +120,25 @@ namespace Attachments
             {
                 statusCount = checkValue(statusCount, z);
                 CurrentStatus = (StatusEffectAttachment)status[statusCount];
-                attachmentUI.SwitchUI(currentSlot, statusCount, status);currentStatusColor = GetCurrentColor(CurrentStatus);
+                attachmentUI.SwitchUI(currentSlot, statusCount, status);
+                currentStatusColor = GetCurrentColor(CurrentStatus);
                 setColor();
 
-        }
+            }
             else if (currentSlot == 1)
             {
                 magazineCount = checkValue(magazineCount, z);
                 CurrentMagazine =(MagazineAttachment) magazine[magazineCount];
-                attachmentUI.SwitchUI(currentSlot, magazineCount, magazine); currentMagazineColor = GetCurrentColor(CurrentMagazine);
+                attachmentUI.SwitchUI(currentSlot, magazineCount, magazine);
+                currentMagazineColor = GetCurrentColor(CurrentMagazine);
                 setColor();
             }
             else if (currentSlot == 2)
             {
                 muzzleCount = checkValue(muzzleCount, z);
                 CurrentMuzzle = (MuzzleAttachment) muzzle[muzzleCount];
-                attachmentUI.SwitchUI(currentSlot, muzzleCount, muzzle);currentMuzzleColor = GetCurrentColor(CurrentMuzzle);
+                attachmentUI.SwitchUI(currentSlot, muzzleCount, muzzle);
+                currentMuzzleColor = GetCurrentColor(CurrentMuzzle);
                 setColor();
             }
         }
