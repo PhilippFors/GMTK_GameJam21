@@ -13,5 +13,8 @@ namespace LevelManager
         public float enemyAmount;
         
         public GameObject baseEnemy;
+        public GameObject fatEnemy;
+        public GameObject FastEnemy;
+        
     }
 }

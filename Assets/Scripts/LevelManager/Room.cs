@@ -37,16 +37,22 @@ namespace LevelManager
         { 
             if(other.CompareTag("Player"))
             {
-                door.GetComponent<Renderer>().enabled = true;
-                door.GetComponent<Collider>().enabled = true;
-                lvManager.currentRoom = this;
-                lvManager.SpawnEnemies();
-                lvManager.doorOpen = false;
-
                 if (sceneExit)
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    
                 }
+                else
+                {
+                    door.GetComponent<Renderer>().enabled = true;
+                    door.GetComponent<Collider>().enabled = true;
+                    lvManager.currentRoom = this;
+                    lvManager.SpawnEnemies();
+                    lvManager.doorOpen = false;
+                }
+               
+
+               
             }
            
         }
