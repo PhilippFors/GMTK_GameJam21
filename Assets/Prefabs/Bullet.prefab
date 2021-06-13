@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810483369543942681}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.354, y: 4.429, z: -4.624}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.20699, y: 0.20699, z: 0.20699}
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,6 +113,9 @@ MonoBehaviour:
   bulletSpeed: 18
   prefab: {fileID: 4546430847613277575, guid: 020b8b7a0f45c714284343191aee277b, type: 3}
   impactSFX: {fileID: 8300000, guid: c723cc5477d82c14a9f67c83efcb1036, type: 3}
+  redParticleEffect: {fileID: 5571971415705040400, guid: c1db322865a25954ca02fee0a2267198, type: 3}
+  blueParticleEffect: {fileID: 5608134739260332763, guid: 8e4f13380fb235b4387adcb3b9f25713, type: 3}
+  greenParticleEffect: {fileID: 2414570155074425318, guid: 85ce0e53c590b40408482db1d53c87f8, type: 3}
 --- !u!54 &919078325630557241
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -200,18 +203,18 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 1, g: 1, b: 1, a: 0}
+      key3: {r: 1, g: 1, b: 1, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 0
-      ctime3: 0
+      ctime2: 65535
+      ctime3: 65535
       ctime4: 0
       ctime5: 0
       ctime6: 0

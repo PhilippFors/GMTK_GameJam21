@@ -173,8 +173,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786404479575385749}
-  m_LocalRotation: {x: 0, y: -1, z: -0, w: 0.00006535147}
-  m_LocalPosition: {x: 0.467, y: 1.6139997, z: 0.22699976}
+  m_LocalRotation: {x: 0.0000003744824, y: -1, z: -0.00000037453165, w: 0.00006572598}
+  m_LocalPosition: {x: 0.4669997, y: 1.6139997, z: 0.227}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1336180839}
@@ -457,9 +457,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &3789261837764966752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
   currentMuzzleColor: {r: 0, g: 0, b: 0, a: 0}
   currentStatusColor: {r: 0, g: 0, b: 0, a: 0}
   currentMagazineColor: {r: 0, g: 0, b: 0, a: 0}
-  gunSFX: {fileID: 0}
+  gunSFX: {fileID: 4971419737590796745}
 --- !u!143 &8176238102398365912
 CharacterController:
   m_ObjectHideFlags: 0

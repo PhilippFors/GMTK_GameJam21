@@ -354,6 +354,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26806e1777a96ec418d5e2e00ac9ac36, type: 3}
+--- !u!1 &1004286407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 913610834595477620, guid: db01d461a45281f42a772384f99b40eb, type: 3}
+  m_PrefabInstance: {fileID: 5340179341224750811}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1004286408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004286407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daefeb72dcd54cac961c210693152de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camTransform: {fileID: 5340179341224750812}
+  test: {fileID: 11400000, guid: 08964460267d791418ad078aaeaf9bf6, type: 2}
+  valuesList: []
 --- !u!1001 &1031048212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -975,6 +995,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 390727314327608347, guid: db01d461a45281f42a772384f99b40eb, type: 3}
+      propertyPath: cameraShakeValues
+      value: 
+      objectReference: {fileID: 11400000, guid: 08964460267d791418ad078aaeaf9bf6, type: 2}
     - target: {fileID: 1030127020338232703, guid: db01d461a45281f42a772384f99b40eb, type: 3}
       propertyPath: m_Name
       value: MainGameplay
@@ -1023,8 +1047,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6962785616441204667, guid: db01d461a45281f42a772384f99b40eb, type: 3}
+      propertyPath: status.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 70758663585ac9c449969e50dbb83c5c, type: 2}
+    - target: {fileID: 6962785616441204667, guid: db01d461a45281f42a772384f99b40eb, type: 3}
+      propertyPath: status.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: d0ba4cea63dea6b44bdccc48f6a4bf18, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db01d461a45281f42a772384f99b40eb, type: 3}
+--- !u!4 &5340179341224750812 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 913610834595477626, guid: db01d461a45281f42a772384f99b40eb, type: 3}
+  m_PrefabInstance: {fileID: 5340179341224750811}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5487018135666485089
 PrefabInstance:
   m_ObjectHideFlags: 0

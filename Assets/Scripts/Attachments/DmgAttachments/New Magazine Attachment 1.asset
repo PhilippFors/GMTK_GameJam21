@@ -15,5 +15,5 @@ MonoBehaviour:
   damageType: 1
   attachmentID: 0
   uiSprite: {fileID: 21300000, guid: bde3be9f70b491a4da0525a9183afeae, type: 3}
-  dmgMultiplier: 0.3
-  fireRate: 15
+  dmgMultiplier: 0.2
+  fireRate: 12
