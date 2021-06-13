@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Entities.Player.PlayerInput;
 
@@ -5,8 +6,15 @@ namespace Entities.Player.Movement
 {
     public class PlayerMovementController : MonoBehaviour
     {
-        [SerializeField] private float movementSpeed;
+        public Vector3 CurrentVelocity { get; private set; }
 
+        [SerializeField] private float mainMovementSpeed;
+        
+        [Header("Dash")]
+        [SerializeField] private float dashSpeed;
+        [SerializeField] private float dashRechargeTime;
+        [SerializeField] private float dashDuration;
+        
         [Header("Grounded settings")]
         [SerializeField] private LayerMask groundedMask;
         [SerializeField] private float checkSphereYPos;
@@ -19,11 +27,20 @@ namespace Entities.Player.Movement
         private Camera mainCam;
         private bool isDashing;
         private bool isGrounded;
-
+        private CharacterController characterController;
+        private Vector3 oldPos;
+        private float dashCharge;
+        private float dashTime;
+        private float maxDashCharge = 100f;
+        private float currentMovementSpeed;
+        
         private void Awake()
         {
+            currentMovementSpeed = mainMovementSpeed;
+            oldPos = transform.position;
             mainCam = Camera.main;
-            PlayerInputController.Instance.Dash.Performed += ctx => Dash();
+            characterController = GetComponent<CharacterController>();
+            PlayerInputController.Instance.Dash.Performed += ctx => StartDash();
         }
         
         private void Update()
@@ -31,23 +48,57 @@ namespace Entities.Player.Movement
             IsGrounded();
             Move();
             UpdateLookDirection();
+            DashCooldown();
+            CurrentVelocity = transform.position - oldPos;
         }
 
-        private void Dash()
+        private void DashCooldown()
         {
-            // TODO: Dash
+            float timeSinceDashEnded = Time.time - dashTime;
+
+            float perc = timeSinceDashEnded / dashRechargeTime;
+
+            dashCharge = Mathf.Lerp(0, maxDashCharge, perc);
+        }
+
+        private void StartDash()
+        {
+            if (dashCharge >= 100)
+            {
+                isDashing = true;
+                
+                dashCharge = 0;
+                
+                currentMovementSpeed = dashSpeed;
+
+                StartCoroutine(DashTimer());
+            }
+        }
+
+        private IEnumerator DashTimer()
+        {
+            yield return new WaitForSeconds(dashDuration);
+
+            ResetMovement();
+        }
+        
+        private void ResetMovement()
+        {
+            dashTime = Time.time;
+            currentMovementSpeed = mainMovementSpeed;
+            isDashing = false;
         }
         
         private void Move()
         {
-            transform.position += (currentMoveDirection + velocity).normalized * (movementSpeed * Time.deltaTime);
+            characterController.Move((currentMoveDirection + velocity).normalized * (currentMovementSpeed * Time.deltaTime));
 
             var move = MovementDir;
             var direction = new Vector3(move.x, 0, move.y);
 
             if (!isDashing)
             {
-                currentMoveDirection = direction * movementSpeed;
+                currentMoveDirection = direction * currentMovementSpeed;
             }
         }
 

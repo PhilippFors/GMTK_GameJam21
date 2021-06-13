@@ -9,18 +9,22 @@ namespace Entities.Enemy
     {
         public float Damage => damage;
         public float AttackRange => attackRange;
+        public bool IsAttacking => isAttacking;
         
         [SerializeField] protected float attackRange;
         [SerializeField] protected float attackRate;
         [SerializeField] protected float damage;
-        
+
+        protected bool isAttacking;
         protected bool canAttack;
-        private float attackTime;
+        private float attackWaitTime;
         private float currentTimer;
+        protected Animator animator;
 
         private void Awake()
         {
-            attackTime = 1f / attackRate;
+            attackWaitTime = 1f / attackRate;
+            animator = GetComponentInChildren<Animator>();
         }
 
         private void Update()
@@ -30,7 +34,7 @@ namespace Entities.Enemy
 
         private void AttackCountdown()
         {
-            if (currentTimer >= attackTime)
+            if (currentTimer >= attackWaitTime)
             {
                 if (!canAttack)
                 {
@@ -46,8 +50,9 @@ namespace Entities.Enemy
 
         protected void ResetTimer()
         {
-            currentTimer -= attackTime;
+            currentTimer = 0;
         }
+        
         public abstract void Attack();
     }
 }

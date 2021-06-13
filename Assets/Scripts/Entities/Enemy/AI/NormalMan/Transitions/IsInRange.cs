@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Entities.Enemy.AI.NormalMan.Transitions
 {
@@ -7,7 +8,26 @@ namespace Entities.Enemy.AI.NormalMan.Transitions
     {
         public override bool Check(StateMachine stateMachine)
         {
-            return (stateMachine.transform.position - stateMachine.Player.position).sqrMagnitude < Mathf.Pow(stateMachine.AttackBehaviour.AttackRange, 2);
+            if (Vector3.Distance(stateMachine.Player.position, stateMachine.transform.position) > stateMachine.EnemyAttack.AttackRange)
+            {
+                if (!stateMachine.EnemyAttack.IsAttacking)
+                {
+                    stateMachine.NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+                    return false;
+                }
+                else
+                {
+                    stateMachine.NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+                    return true;
+                }
+            }
+            else
+            {
+                stateMachine.NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+                return true;
+            }
         }
+
+
     }
 }

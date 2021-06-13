@@ -1,13 +1,18 @@
 using Entities.Enemy;
+using UnityEngine;
 
 public class NormalManAttack : MeleeAttack
 {
+    [SerializeField] private AnimationClip attack;
+
     public override void Attack()
     {
-        // TODO: Start animation
         if (canAttack)
         {
-            StartCoroutine(StartAttackTiming(10, 30));
+            canAttack = false;
+            ResetTimer();
+            animator.SetTrigger("attack");
+            StartCoroutine(StartAttackTiming(0, 25, attack));
         }
     }
 }

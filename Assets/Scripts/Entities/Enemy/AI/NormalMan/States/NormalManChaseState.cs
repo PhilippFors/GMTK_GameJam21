@@ -8,14 +8,28 @@ namespace Entities.Enemy.AI.NormalMan
     {
         public override void Tick(StateMachine stateMachine)
         {
-            stateMachine.NavMeshAgent.destination = stateMachine.Player.position;
+            var destination = AISteering.AvoidanceSteering(stateMachine.transform.forward, stateMachine);
 
-            var dir = stateMachine.Player.position - stateMachine.transform.position;
+            stateMachine.NavMeshAgent.destination = destination;
+
+            var dir = destination - stateMachine.transform.position;
             
             dir.y = 0;
             
-            stateMachine.transform.rotation = Quaternion.LookRotation(dir);
-            stateMachine.NavMeshAgent.Move(stateMachine.transform.forward * stateMachine.EnemyBase.MovementSpeed * Time.deltaTime);
+            Vector3 moveTo = stateMachine.transform.forward * (stateMachine.EnemyBase.MovementSpeed * Time.deltaTime);
+
+            stateMachine.NavMeshAgent.Move(moveTo);
+            // stateMachine.NavMeshAgent.Move(stateMachine.transform.forward * stateMachine.EnemyBase.MovementSpeed * Time.deltaTime);
+        }
+
+        public override void OnStateEnter(StateMachine stateMachine)
+        {
+            stateMachine.Animator.SetBool("isRunning", true);
+        }
+
+        public override void OnStateExit(StateMachine stateMachine)
+        {
+            stateMachine.Animator.SetBool("isRunning", false);
         }
     }
 }

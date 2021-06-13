@@ -21,19 +21,25 @@ namespace Entities.Enemy.AI.ProjectileMan.States
 
         private void Move(StateMachine stateMachine)
         {
-            if (Vector3.Distance(stateMachine.Player.position, stateMachine.transform.position) > findNewPointDistance || stateMachine.NavMeshAgent.remainingDistance < 0.5f)
+            var dir = Vector3.zero;
+            if (Vector3.Distance(stateMachine.Player.position, stateMachine.transform.position) > findNewPointDistance || stateMachine.NavMeshAgent.remainingDistance < 0.8f)
             {
+                dir = stateMachine.Player.position - stateMachine.transform.position;
                 currentTimer -= newPointTimer;
                 FindPointNearPlayer(stateMachine);
             }
+            else
+            {
+                dir = currentPoint - stateMachine.transform.position;
+            }
             
             stateMachine.NavMeshAgent.destination = currentPoint;
-
-            var dir = currentPoint - stateMachine.transform.position;
-
+            
             dir.y = 0;
 
-            stateMachine.transform.rotation = Quaternion.LookRotation(dir);
+            var newRot = Quaternion.LookRotation(dir);
+            stateMachine.transform.rotation =
+                Quaternion.Lerp(stateMachine.transform.rotation, newRot, 7f * Time.deltaTime);
             stateMachine.NavMeshAgent.Move(stateMachine.transform.forward * stateMachine.EnemyBase.MovementSpeed *
                                            Time.deltaTime);
         }

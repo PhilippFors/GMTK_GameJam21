@@ -7,35 +7,34 @@ namespace Entities.Enemy.AI.NormalMan.States
     {
         public override void Tick(StateMachine stateMachine)
         {
-            Move(stateMachine);
-            stateMachine.AttackBehaviour.Attack();
-        }
-
-        private void Move(StateMachine stateMachine)
-        {
-            if (!IsInRange(stateMachine, stateMachine.AttackBehaviour.AttackRange - 1f))
+            if (!CheckInFront(stateMachine) && !stateMachine.EnemyAttack.IsAttacking)
             {
-                stateMachine.NavMeshAgent.isStopped = false;
-
-                stateMachine.NavMeshAgent.destination = stateMachine.Player.position;
-
                 var dir = stateMachine.Player.position - stateMachine.transform.position;
-
+            
                 dir.y = 0;
 
-                stateMachine.transform.rotation = Quaternion.LookRotation(dir);
-                stateMachine.NavMeshAgent.Move(stateMachine.transform.forward *
-                                               (stateMachine.EnemyBase.MovementSpeed - 2f) * Time.deltaTime);
+                var newRot = Quaternion.LookRotation(dir);
+                stateMachine.transform.rotation =
+                    Quaternion.Lerp(stateMachine.transform.rotation, newRot, 7f * Time.deltaTime);
             }
             else
             {
-                stateMachine.NavMeshAgent.isStopped = true;
+                stateMachine.EnemyAttack.Attack();
             }
         }
-
-        private bool IsInRange(StateMachine stateMachine, float range)
+        bool CheckInFront(StateMachine stateMachine)
         {
-            return (stateMachine.transform.position - stateMachine.Player.position).sqrMagnitude < Mathf.Pow(range, 2);
+            Ray ray = new Ray(stateMachine.transform.position, stateMachine.transform.forward);
+            return Physics.Raycast(ray, stateMachine.EnemyAttack.AttackRange + 1, LayerMask.GetMask("Player"));
+        }
+        public override void OnStateEnter(StateMachine stateMachine)
+        {
+            stateMachine.NavMeshAgent.isStopped = true;
+        }
+
+        public override void OnStateExit(StateMachine stateMachine)
+        {
+            stateMachine.NavMeshAgent.isStopped = false;
         }
     }
 }
