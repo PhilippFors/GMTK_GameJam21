@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b2e6cad5314571aeddadfa5045871b, type: 3}
+  m_Name: HardWave
+  m_EditorClassIdentifier: 
+  heavySpawnRate: 0.2
+  fastSpawnRate: 0.3
+  enemyAmount: 7
+  baseEnemy: {fileID: 2546880290984102752, guid: 600ac88409e0cc54c8c915ac7d6e7168, type: 3}
+  fatEnemy: {fileID: 5487018136476971923, guid: 26806e1777a96ec418d5e2e00ac9ac36, type: 3}
+  FastEnemy: {fileID: 5374210545909694513, guid: 88ad10563e867f444897efe42499fb31, type: 3}
