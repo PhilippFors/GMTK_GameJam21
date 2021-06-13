@@ -972,9 +972,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900ce4e3eb0f04f4581bc7c41c8496e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusUI: {fileID: 2879070932715517160}
-  magazineUI: {fileID: 2879070933189504488}
-  muzzelUI: {fileID: 2879070931193424467}
+  statusUI: {fileID: 2879070932172181921}
+  magazineUI: {fileID: 2879070931332026381}
+  muzzelUI: {fileID: 2879070931463292021}
   muzzelNext: {fileID: 1950909648}
   magazineNext: {fileID: 8730406360887857959}
   statusNext: {fileID: 6543483795854537353}

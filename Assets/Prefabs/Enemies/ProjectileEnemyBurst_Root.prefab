@@ -197,7 +197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5487018136476971926
 Transform:
   m_ObjectHideFlags: 0
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a2c069d2fb17c46ab660eb134f12d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 80
   damageType: 1
   damageResistances:
   - damageType: 0
@@ -270,6 +270,9 @@ MonoBehaviour:
   attackRange: 0
   attackRate: 0.7
   damage: 6
+  reload: {fileID: 0}
+  shotgunShoot: {fileID: 0}
+  burstShoot: {fileID: 0}
   bulletSpawnPoint: {fileID: 5487018136526411750}
   bulletSpeed: 15
   burstAmount: 4
