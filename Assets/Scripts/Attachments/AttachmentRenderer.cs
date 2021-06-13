@@ -22,7 +22,7 @@ namespace Attachments
 
         private void Start()
         {
-            manager.OnAttachmentSwitch += SwitchAttachmentInRenderer;
+           // manager.OnAttachmentSwitch += SwitchAttachmentInRenderer;
 
 
             if (attachmentObject != null)
