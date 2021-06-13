@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa4c40176ae674a429a0334b76e1a71e, type: 3}
-  m_Name: SecondDamageAttachment
+  m_Script: {fileID: 11500000, guid: 9828a781640588a4e9af4bd0bf5be27f, type: 3}
+  m_Name: New Muzzle Attachment 2
   m_EditorClassIdentifier: 
-  dmgMultiplier: 0
-  damageType: 0
+  damageType: 2
+  attachmentID: {fileID: 0}
+  uiSprite: {fileID: 21300000, guid: 0545df4f2d353474ab27b13f4e28ca9c, type: 3}
+  dmgMultiplier: 0.3
+  bulletSpeed: 80

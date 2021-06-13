@@ -1,20 +1,14 @@
 fileFormatVersion: 2
-guid: e1f148fe4c47eab45919fbc0f55a2ab7
+guid: e5b9b495ac127394181941a246c473b2
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: FatMan_Start
+    second: Idle
   - first:
-      74: -3100369314251171874
-    second: FatMan_Idle
-  - first:
-      74: -9121621101649706817
-    second: FatMan_Running
-  - first:
-      74: 6720303635017113406
-    second: FatMan_Attack
+      74: -998496362607748373
+    second: Take 001
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -44,11 +38,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: FatMan_Start
+      name: Idle
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 5
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -73,69 +67,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: FatMan_Idle
+      name: Take 001
       takeName: Take 001
       internalID: 0
-      firstFrame: 4
-      lastFrame: 5
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: FatMan_Running
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 5
-      lastFrame: 25
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: FatMan_Attack
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 25
-      lastFrame: 65
+      firstFrame: 0
+      lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

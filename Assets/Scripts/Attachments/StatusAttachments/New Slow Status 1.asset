@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b330efd8d6aa93b43a00a0904a837269, type: 3}
-  m_Name: New Magazine Attachment
+  m_Script: {fileID: 11500000, guid: cc60916e2d0119042a31f3a6f8588586, type: 3}
+  m_Name: New Slow Status 1
   m_EditorClassIdentifier: 
   damageType: 0
   attachmentID: {fileID: 0}
-  uiSprite: {fileID: 21300000, guid: 398138c4b623f3f48ac981a9389e7c11, type: 3}
-  dmgMultiplier: 0.5
-  fireRate: 12
+  uiSprite: {fileID: 21300000, guid: 7cbd3d4bb308c1f43bb631a2aab05a2e, type: 3}
+  statusType: 0
