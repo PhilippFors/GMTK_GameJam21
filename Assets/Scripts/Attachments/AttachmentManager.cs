@@ -25,7 +25,7 @@ namespace Attachments
         private GameObject currentStatusVisual;
         private GameObject currentMagazineVisual;
         private GameObject currentMuzzleVisual;
-            
+
         public List<AttachmentBase> currentAttachments = new List<AttachmentBase>();
         // public Action<int, int> OnAttachmentSwitch;
 
@@ -37,6 +37,9 @@ namespace Attachments
         public Color currentMagazineColor;
 
         [SerializeField] private SoundEffectController gunSFX;
+        [SerializeField] private SoundEffectController redSFX;
+        [SerializeField] private SoundEffectController blueSFX;
+        [SerializeField] private SoundEffectController greenSFX;
 
         public MuzzleAttachment CurrentMuzzle
         {
@@ -77,7 +80,7 @@ namespace Attachments
             attachmentUI.SwitchUI(2, muzzleCount, muzzle);
 
             attachmentUI.MoveSwitcher(0);
-            
+
             SetStatusVisual();
             SetMagazineVisual();
             SetMuzzleVisual();
@@ -139,6 +142,7 @@ namespace Attachments
                 currentStatusColor = GetCurrentColor(CurrentStatus);
                 setColor();
                 SetStatusVisual();
+                PlayChangeSoundEffect(CurrentStatus.DamageType);
             }
             else if (currentSlot == 1)
             {
@@ -148,6 +152,7 @@ namespace Attachments
                 currentMagazineColor = GetCurrentColor(CurrentMagazine);
                 setColor();
                 SetMagazineVisual();
+                PlayChangeSoundEffect(CurrentMagazine.DamageType);
             }
             else if (currentSlot == 2)
             {
@@ -158,6 +163,23 @@ namespace Attachments
                 setColor();
                 SetMuzzleVisual();
                 gunSFX.SetEffect(CurrentMuzzle.SFX);
+                PlayChangeSoundEffect(CurrentMuzzle.DamageType);
+            }
+        }
+
+        private void PlayChangeSoundEffect(DamageType type)
+        {
+            switch (type)
+            {
+                case DamageType.blue:
+                    blueSFX.PlayEffect();
+                    break;
+                case DamageType.red:
+                    redSFX.PlayEffect();
+                    break;
+                case DamageType.green:
+                    greenSFX.PlayEffect();
+                    break;
             }
         }
 
@@ -168,7 +190,7 @@ namespace Attachments
             {
                 currentMagazineVisual.SetActive(false);
             }
-                
+
             currentMagazineVisual = att.gameObject;
             currentMagazineVisual.gameObject.SetActive(true);
         }
@@ -180,11 +202,11 @@ namespace Attachments
             {
                 currentMuzzleVisual.SetActive(false);
             }
-                
+
             currentMuzzleVisual = att.gameObject;
             currentMuzzleVisual.gameObject.SetActive(true);
         }
-        
+
 
         private void SetStatusVisual()
         {
@@ -193,11 +215,11 @@ namespace Attachments
             {
                 currentStatusVisual.SetActive(false);
             }
-                
+
             currentStatusVisual = att.gameObject;
             currentStatusVisual.gameObject.SetActive(true);
         }
-        
+
         public int checkValue(int i, float z)
         {
             if (z > 0)

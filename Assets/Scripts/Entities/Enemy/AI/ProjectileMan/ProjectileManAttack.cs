@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Effects;
 using ObjectPool;
 using UnityEngine;
 
@@ -33,7 +34,10 @@ namespace Entities.Enemy.AI.ProjectileMan
         [SerializeField] private float horizontalShotgunSpread;
         [SerializeField] private float chaseTime;
         [SerializeField] private float attackTime;
-
+        [SerializeField] private SoundEffectController onceGunSFX;
+        [SerializeField] private SoundEffectController shotGunSFX;
+        [SerializeField] private SoundEffectController shotGunReload;
+        
         private Coroutine pointTimer;
         private Vector3 currentPoint;
 
@@ -181,6 +185,7 @@ namespace Entities.Enemy.AI.ProjectileMan
             var bullet = BulletBasePool.Instance.GetObject();
             bullet.transform.position = bulletSpawnPoint.position;
             bullet.gameObject.SetActive(true);
+            onceGunSFX.PlayEffect();
             animator.Play("Attack_Once");
             bullet.Initialize(bulletSpawnPoint.forward, damage, bulletSpeed, true);
         }
@@ -188,8 +193,10 @@ namespace Entities.Enemy.AI.ProjectileMan
         private IEnumerator ShotGunShot()
         {
             animator.Play("Reload");
+            shotGunReload.PlayEffect();
             yield return new WaitForSeconds(reload.length);
             animator.Play("Attack_Shotgun");
+            shotGunSFX.PlayEffect();
             ShotGunSpread();
         }
 
