@@ -58,6 +58,8 @@ namespace Entities.Enemy
                 Instantiate(explosion);
             }
 
+            LevelManager.LevelManager.Instance.instantiatedEnemies.Remove(gameObject);
+            // TODO: Play death animation
             Instantiate(death);
             StartCoroutine(ToDestroy());
         }
