@@ -398,11 +398,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 70
-  damageType: 2
+  damageType: 1
   damageResistances:
   - damageType: 0
     resistance: 0.486
-  - damageType: 1
+  - damageType: 2
     resistance: 0.628
   movementSpeed: 3
 --- !u!114 &5374210545909694516

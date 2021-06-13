@@ -66,10 +66,9 @@ namespace TheGun.Bullets
                 if (other.gameObject.tag == "Enemy")
                 {
                     var enemy = other.GetComponent<EnemyBase>();
-                    var dmg = damage * CalculateDamageMultiplier(enemy);
-                    Debug.Log($"Damage: {dmg}");
+                    damage = damage * CalculateDamageMultiplier(enemy);
                     statusEffectAttachment.ApplyEffect(enemy);
-                    enemy.TakeDamage(dmg);
+                    enemy.TakeDamage(damage);
                     DestroyBullet();
                 }
             }
@@ -78,7 +77,6 @@ namespace TheGun.Bullets
                 if (other.gameObject.tag == "Player")
                 {
                     var player = other.GetComponent<PlayerBase>();
-                    Debug.Log($"Damage: {damage}");
                     player.TakeDamage(damage);
                     DestroyBullet();
                 }
@@ -86,6 +84,22 @@ namespace TheGun.Bullets
             
             if (muzzleAttachment != null && muzzleAttachment.DamageType == DamageType.red)
             {
+                var enemies = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("Enemy"));
+                if (enemies.Length > 0)
+                {
+                    foreach (var enemy in enemies)
+                    {
+                        if (enemy != other)
+                        {
+                            var b = enemy.GetComponent<EnemyBase>();
+                            if (b.DamageType != muzzleAttachment.DamageType)
+                            {
+                                b.TakeDamage(damage / 2);
+                            }
+                        }
+                    }
+                }
+
                 var p = Instantiate(prefab);
                 p.transform.parent = null;
                 p.SetEffect(impactSFX);
@@ -110,8 +124,7 @@ namespace TheGun.Bullets
                     tempMultiplier *= 1 - resistances.Find(x => x.DamageType == att.DamageType).Resistance;
                 }
             }
-
-            Debug.Log($" Multiplier: {tempMultiplier}");
+            
             return tempMultiplier;
         }
 
