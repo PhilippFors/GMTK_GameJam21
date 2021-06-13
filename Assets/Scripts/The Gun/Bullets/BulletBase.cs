@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using Attachments;
 using Attachments.DamageAttachments;
 using Entities.Enemy;
 using Entities.Player;
+using Entities.Player.PlayerInput;
 using ObjectPool;
 using UnityEngine;
 
@@ -16,7 +18,9 @@ namespace TheGun.Bullets
         private float maxExistTime = 3f;
         private float currentExistTime;
         private float baseMultiplier = 0.2f;
-
+        public AttachmentManager manager => PlayerInputController.Instance.GetComponent<AttachmentManager>();
+        public TrailRenderer a => GetComponent<TrailRenderer>();
+        
         private List<DamageAttachment> damageAttachments
         {
             get
@@ -32,8 +36,15 @@ namespace TheGun.Bullets
         private MuzzleAttachment muzzleAttachment;
         private StatusEffectAttachment statusEffectAttachment;
 
+        private void OnEnable()
+        {
+            a.startColor = manager.startColorOfBullets;
+            a.endColor = manager.startColorOfBullets;
+        }
+
         private void Update()
         {
+           
             MoveBullet();
             if (currentExistTime >= maxExistTime)
             {
@@ -54,6 +65,7 @@ namespace TheGun.Bullets
                     var enemy = other.GetComponent<EnemyBase>();
                     var dmg = damage * CalculateDamageMultiplier(enemy);
                     Debug.Log($"Damage: {dmg}");
+                    statusEffectAttachment.ApplyEffect(enemy);
                     enemy.TakeDamage(dmg);
                     DestroyBullet();
                 }
@@ -90,14 +102,6 @@ namespace TheGun.Bullets
 
             Debug.Log($" Multiplier: {tempMultiplier}");
             return tempMultiplier;
-        }
-
-        private void ApplyStatusEffect(EnemyBase enemy)
-        {
-            if (statusEffectAttachment.DamageType == enemy.DamageType)
-            {
-                statusEffectAttachment.ApplyEffect(enemy);
-            }
         }
 
         public void Initialize(Vector3 forward, float dmg, StatusEffectAttachment statusEffectAttachment,

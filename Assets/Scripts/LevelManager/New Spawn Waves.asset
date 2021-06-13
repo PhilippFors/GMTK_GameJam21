@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heavySpawnRate: 0
   fastSpawnRate: 0
-  enemyAmount: 4
-  currentEnemies: []
-  baseEnemy: {fileID: 811006625158810565, guid: 87cd176b1ec646441a7afae12c59817f, type: 3}
+  enemyAmount: 1
+  baseEnemy: {fileID: 2546880290984102752, guid: 600ac88409e0cc54c8c915ac7d6e7168, type: 3}

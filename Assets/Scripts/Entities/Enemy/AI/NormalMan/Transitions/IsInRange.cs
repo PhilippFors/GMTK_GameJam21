@@ -27,7 +27,5 @@ namespace Entities.Enemy.AI.NormalMan.Transitions
                 return true;
             }
         }
-
-
     }
 }

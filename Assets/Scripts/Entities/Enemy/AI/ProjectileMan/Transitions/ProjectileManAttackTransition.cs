@@ -7,59 +7,49 @@ namespace Entities.Enemy.AI.ProjectileMan.Transitions
     [CreateAssetMenu(menuName = "AI/Projectile Man/Transitions/Attack transition")]
     public class ProjectileManAttackTransition : Transition
     {
-        [SerializeField] private float chaseTime;
-        [SerializeField] private float attackTime;
-
-        private float randomChaseTime;
-        private float randomAttackTime;
-        private bool timeToAttack = false;
-        private float currentTimer;
-
-        private void OnEnable()
-        {
-            randomChaseTime = chaseTime + Random.Range(-1f, 3f);
-            randomAttackTime = attackTime + Random.Range(-0.5f, 2f);
-        }
-
         public override bool Check(StateMachine stateMachine)
         {
-            if (timeToAttack)
+            var att = (ProjectileManAttack) stateMachine.EnemyAttack;
+            
+            if (att.TimeToAttack)
             {
-                AttackTimer(stateMachine);
+                
+                AttackTimer(stateMachine, att);
             }
             else
             {
-                ChaseTimer(stateMachine);
+               
+                ChaseTimer(stateMachine, att);
             }
 
-            return timeToAttack;
+            return att.TimeToAttack;
         }
 
-        private void ChaseTimer(StateMachine stateMachine)
+        private void ChaseTimer(StateMachine stateMachine, ProjectileManAttack att)
         {
-            if (currentTimer >= randomChaseTime)
+            if (att.CurrentTimer >= att.RandomChaseTime)
             {
-                timeToAttack = true;
-                currentTimer = 0;
-                randomChaseTime = chaseTime + Random.Range(-1f, 3f);
+                att.TimeToAttack = true;
+                att.CurrentTimer = 0;
+                att.RandomChaseTime = att.ChaseTime + Random.Range(-1f, 3f);
             }
             else
             {
-                currentTimer += Time.deltaTime;
+                att.CurrentTimer += Time.deltaTime;
             }
         }
 
-        private void AttackTimer(StateMachine stateMachine)
+        private void AttackTimer(StateMachine stateMachine, ProjectileManAttack att)
         {
-            if (currentTimer >= randomAttackTime)
+            if (att.CurrentTimer >= att.RandomAttackTime)
             {
-                timeToAttack = false;
-                currentTimer = 0;
-                randomAttackTime = attackTime + Random.Range(-0.5f, 2f);
+                att.TimeToAttack = false;
+                att.CurrentTimer = 0;
+                att.RandomAttackTime = att.AttackTime + Random.Range(-1f, 2.5f);
             }
             else
             {
-                currentTimer += Time.deltaTime;
+                att.CurrentTimer += Time.deltaTime;
             }
         }
     }

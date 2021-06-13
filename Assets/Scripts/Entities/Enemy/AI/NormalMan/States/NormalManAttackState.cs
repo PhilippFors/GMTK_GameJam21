@@ -27,6 +27,7 @@ namespace Entities.Enemy.AI.NormalMan.States
             Ray ray = new Ray(stateMachine.transform.position, stateMachine.transform.forward);
             return Physics.Raycast(ray, stateMachine.EnemyAttack.AttackRange + 1, LayerMask.GetMask("Player"));
         }
+        
         public override void OnStateEnter(StateMachine stateMachine)
         {
             stateMachine.NavMeshAgent.isStopped = true;

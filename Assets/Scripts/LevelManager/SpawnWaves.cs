@@ -11,7 +11,7 @@ namespace LevelManager
         public float heavySpawnRate;
         public float fastSpawnRate;
         public float enemyAmount;
-        public List<GameObject> currentEnemies;
+        
         public GameObject baseEnemy;
     }
 }
