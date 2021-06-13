@@ -111,7 +111,7 @@ namespace TheGun.Bullets
                 }
             }
             
-            if (muzzleAttachment != null && !other.GetComponent<BulletBase>() && muzzleAttachment.DamageType == DamageType.red)
+            if (!fromEnemy && muzzleAttachment != null && !other.GetComponent<BulletBase>() && muzzleAttachment.DamageType == DamageType.red)
             {
                 var enemies = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("Enemy"));
                 if (enemies.Length > 0)
@@ -212,7 +212,6 @@ namespace TheGun.Bullets
             a.time = 0;
             a.enabled = false;
             BulletBasePool.Instance.ReleaseObject(this);
-            
         }
 
         private void OnDestroy()
