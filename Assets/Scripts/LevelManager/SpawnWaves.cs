@@ -1,15 +1,17 @@
 using System.Collections.Generic;
+using DataContaner.RuntimeSets;
 using Entities.Enemy;
 using UnityEngine;
 
 namespace LevelManager
 {
     [CreateAssetMenu]
-    public class SpawnWaves: ScriptableObject
+    public class SpawnWaves: EntitySet<SpawnWaves>
     {
         public float heavySpawnRate;
         public float fastSpawnRate;
         public float enemyAmount;
-        public List<EnemyBase> currentEnemies;
+        public List<GameObject> currentEnemies;
+        public GameObject baseEnemy;
     }
 }
