@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: New Slow Status
   m_EditorClassIdentifier: 
   damageType: 2
-  attachmentID: {fileID: 0}
-  uiSprite: {fileID: 21300000, guid: 0545df4f2d353474ab27b13f4e28ca9c, type: 3}
+  attachmentID: 2
+  uiSprite: {fileID: 21300000, guid: 90e1ed75b8754e74cace174deb370065, type: 3}
   statusType: 0
   effectCooldown: 3
   strength: 0.7

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 1
   attachmentID: {fileID: 0}
-  uiSprite: {fileID: 21300000, guid: 7cbd3d4bb308c1f43bb631a2aab05a2e, type: 3}
+  uiSprite: {fileID: 21300000, guid: 6d2b4aa24e8d4084081c5e8e2a7aa728, type: 3}
   statusType: 1
   effectCooldown: 5
   strength: 4

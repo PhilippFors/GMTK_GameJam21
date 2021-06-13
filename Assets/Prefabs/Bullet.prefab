@@ -111,7 +111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 18
-  a: {fileID: 0}
+  prefab: {fileID: 4546430847613277575, guid: 020b8b7a0f45c714284343191aee277b, type: 3}
+  impactSFX: {fileID: 8300000, guid: c723cc5477d82c14a9f67c83efcb1036, type: 3}
 --- !u!54 &919078325630557241
 Rigidbody:
   m_ObjectHideFlags: 0

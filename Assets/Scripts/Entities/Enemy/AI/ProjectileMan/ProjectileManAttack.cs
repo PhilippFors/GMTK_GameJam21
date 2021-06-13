@@ -181,6 +181,7 @@ namespace Entities.Enemy.AI.ProjectileMan
             var bullet = BulletBasePool.Instance.GetObject();
             bullet.transform.position = bulletSpawnPoint.position;
             bullet.gameObject.SetActive(true);
+            animator.Play("Attack_Once");
             bullet.Initialize(bulletSpawnPoint.forward, damage, bulletSpeed, true);
         }
 
@@ -188,7 +189,7 @@ namespace Entities.Enemy.AI.ProjectileMan
         {
             animator.Play("Reload");
             yield return new WaitForSeconds(reload.length);
-            animator.Play("Attack");
+            animator.Play("Attack_Shotgun");
             ShotGunSpread();
         }
 

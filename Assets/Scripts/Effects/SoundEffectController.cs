@@ -7,9 +7,10 @@ namespace Effects
     [System.Serializable]
     public class SoundEffectController : IEffectController
     {
+        
         [SerializeField] private AudioSource soundEffect;
         [SerializeField] private bool playOnStartup;
-
+        [SerializeField] private bool destroyOnFinish;
         private void Start()
         {
             soundEffect.loop = loop;
@@ -19,6 +20,10 @@ namespace Effects
             }
         }
 
+        public void SetEffect(AudioClip clip)
+        {
+            soundEffect.clip = clip;
+        }
         public override void PlayEffect()
         {
             if (PlayOnCommand)
@@ -28,6 +33,11 @@ namespace Effects
                     StopEffect();
                 }
                 soundEffect.Play();
+            }
+
+            if (destroyOnFinish)
+            {
+                StartCoroutine(DestroyOnFinish());
             }
         }
 
@@ -52,6 +62,12 @@ namespace Effects
             {
                 soundEffect.Play();
             }
+        }
+
+        private IEnumerator DestroyOnFinish()
+        {
+            yield return new WaitForSeconds(2f);
+            Destroy(gameObject);
         }
     }
 }

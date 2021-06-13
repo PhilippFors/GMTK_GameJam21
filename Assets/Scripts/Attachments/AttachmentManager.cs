@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Attachments.DamageAttachments;
+using Effects;
 using Entities.Enemy;
 using Entities.Player.PlayerInput;
 using UnityEngine;
@@ -17,26 +18,35 @@ namespace Attachments
         public List<AttachmentBase> status;
         public List<AttachmentBase> magazine;
 
+        public List<AttachmentID> muzzleVisuals;
+        public List<AttachmentID> magazineVisuals;
+        public List<AttachmentID> statusVisuals;
+
+        private GameObject currentStatusVisual;
+        private GameObject currentMagazineVisual;
+        private GameObject currentMuzzleVisual;
+            
         public List<AttachmentBase> currentAttachments = new List<AttachmentBase>();
         // public Action<int, int> OnAttachmentSwitch;
 
         [SerializeField] private AttachmentUI attachmentUI;
-        
-        
+
         public Color startColorOfBullets;
         public Color currentMuzzleColor;
         public Color currentStatusColor;
         public Color currentMagazineColor;
 
+        [SerializeField] private SoundEffectController gunSFX;
+
         public MuzzleAttachment CurrentMuzzle
         {
-            get => (MuzzleAttachment)muzzle[muzzleCount];
+            get => (MuzzleAttachment) muzzle[muzzleCount];
             set => currentAttachments[0] = value;
         }
 
         public StatusEffectAttachment CurrentStatus
         {
-            get => (StatusEffectAttachment)status[statusCount];
+            get => (StatusEffectAttachment) status[statusCount];
             set => currentAttachments[1] = value;
         }
 
@@ -61,13 +71,18 @@ namespace Attachments
             currentStatusColor = GetCurrentColor(CurrentStatus);
             currentMuzzleColor = GetCurrentColor(CurrentMuzzle);
             setColor();
-            
+
             attachmentUI.SwitchUI(0, statusCount, status);
             attachmentUI.SwitchUI(1, magazineCount, magazine);
             attachmentUI.SwitchUI(2, muzzleCount, muzzle);
-            
-            attachmentUI.MoveSwitcher(0);
 
+            attachmentUI.MoveSwitcher(0);
+            
+            SetStatusVisual();
+            SetMagazineVisual();
+            SetMuzzleVisual();
+
+            gunSFX.SetEffect(CurrentMuzzle.SFX);
             PlayerInputController.Instance.Mousewheel.Performed += ChangeAttachment;
             PlayerInputController.Instance.ChangeSlot.Performed += ctx => ChangeSlot();
         }
@@ -119,27 +134,70 @@ namespace Attachments
             if (currentSlot == 0)
             {
                 statusCount = checkValue(statusCount, z);
-                CurrentStatus = (StatusEffectAttachment)status[statusCount];
-                attachmentUI.SwitchUI(currentSlot, statusCount, status);currentStatusColor = GetCurrentColor(CurrentStatus);
+                CurrentStatus = (StatusEffectAttachment) status[statusCount];
+                attachmentUI.SwitchUI(currentSlot, statusCount, status);
+                currentStatusColor = GetCurrentColor(CurrentStatus);
                 setColor();
-
-        }
+                SetStatusVisual();
+            }
             else if (currentSlot == 1)
             {
                 magazineCount = checkValue(magazineCount, z);
-                CurrentMagazine =(MagazineAttachment) magazine[magazineCount];
-                attachmentUI.SwitchUI(currentSlot, magazineCount, magazine); currentMagazineColor = GetCurrentColor(CurrentMagazine);
+                CurrentMagazine = (MagazineAttachment) magazine[magazineCount];
+                attachmentUI.SwitchUI(currentSlot, magazineCount, magazine);
+                currentMagazineColor = GetCurrentColor(CurrentMagazine);
                 setColor();
+                SetMagazineVisual();
             }
             else if (currentSlot == 2)
             {
                 muzzleCount = checkValue(muzzleCount, z);
                 CurrentMuzzle = (MuzzleAttachment) muzzle[muzzleCount];
-                attachmentUI.SwitchUI(currentSlot, muzzleCount, muzzle);currentMuzzleColor = GetCurrentColor(CurrentMuzzle);
+                attachmentUI.SwitchUI(currentSlot, muzzleCount, muzzle);
+                currentMuzzleColor = GetCurrentColor(CurrentMuzzle);
                 setColor();
+                SetMuzzleVisual();
+                gunSFX.SetEffect(CurrentMuzzle.SFX);
             }
         }
 
+        private void SetMagazineVisual()
+        {
+            var att = magazineVisuals.Find(x => CurrentMagazine.AttachmentID == x.ID);
+            if (currentMagazineVisual != null)
+            {
+                currentMagazineVisual.SetActive(false);
+            }
+                
+            currentMagazineVisual = att.gameObject;
+            currentMagazineVisual.gameObject.SetActive(true);
+        }
+
+        private void SetMuzzleVisual()
+        {
+            var att = muzzleVisuals.Find(x => CurrentMuzzle.AttachmentID == x.ID);
+            if (currentMuzzleVisual != null)
+            {
+                currentMuzzleVisual.SetActive(false);
+            }
+                
+            currentMuzzleVisual = att.gameObject;
+            currentMuzzleVisual.gameObject.SetActive(true);
+        }
+        
+
+        private void SetStatusVisual()
+        {
+            var att = statusVisuals.Find(x => CurrentStatus.AttachmentID == x.ID);
+            if (currentStatusVisual != null)
+            {
+                currentStatusVisual.SetActive(false);
+            }
+                
+            currentStatusVisual = att.gameObject;
+            currentStatusVisual.gameObject.SetActive(true);
+        }
+        
         public int checkValue(int i, float z)
         {
             if (z > 0)
@@ -168,7 +226,6 @@ namespace Attachments
 
         private void Update()
         {
-           
         }
 
 
@@ -177,8 +234,8 @@ namespace Attachments
             Color currentColor = attachment.DamageType switch
             {
                 DamageType.red => Color.red,
-                DamageType.blue =>  Color.blue,
-                DamageType.green =>  Color.green,
+                DamageType.blue => Color.blue,
+                DamageType.green => Color.green,
                 _ => throw new ArgumentOutOfRangeException()
             };
             return currentColor;
