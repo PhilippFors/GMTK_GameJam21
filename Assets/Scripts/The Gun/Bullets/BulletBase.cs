@@ -78,7 +78,19 @@ namespace TheGun.Bullets
                     var dmg = damage * CalculateDamageMultiplier(enemy);
                     Debug.Log($"Damage: {dmg}");
                     //Instantiate(particleEffectPrefab, transform).GetComponent<ParticleSystem>().Play();
-                    Instantiate(redParticleEffect, transform.position, Quaternion.identity);
+                    switch (muzzleAttachment.DamageType)
+                    {
+                        case DamageType.blue:
+                            Instantiate(blueParticleEffect, transform.position, Quaternion.identity);
+                            break;
+                        case DamageType.red:
+                            Instantiate(redParticleEffect, transform.position, Quaternion.identity);
+                            break;
+                        case DamageType.green:
+                            Instantiate(greenParticleEffect, transform.position, Quaternion.identity);
+                            break;
+                    }
+                   
                     statusEffectAttachment.ApplyEffect(enemy);
                     enemy.TakeDamage(dmg);
                     DestroyBullet();
@@ -91,18 +103,7 @@ namespace TheGun.Bullets
                     var player = other.GetComponent<PlayerBase>();
                     Debug.Log($"Damage: {damage}");
                     //Instantiate(particleEffectPrefab, transform).GetComponent<ParticleSystem>().Play();
-                    switch (muzzleAttachment.DamageType)
-                    {
-                        case DamageType.blue:
-                            Instantiate(blueParticleEffect, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
-                            break;
-                        case DamageType.red:
-                            Instantiate(redParticleEffect, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
-                            break;
-                        case DamageType.green:
-                            Instantiate(greenParticleEffect, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
-                            break;
-                    }
+                    Instantiate(redParticleEffect, transform.position, Quaternion.identity);
                     player.TakeDamage(damage);
                     DestroyBullet();
                 }

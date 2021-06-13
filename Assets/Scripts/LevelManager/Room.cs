@@ -5,6 +5,7 @@ using Entities.Enemy;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 
 
 namespace LevelManager
@@ -16,6 +17,7 @@ namespace LevelManager
         public List<SpawnWaves> waves;
         public GameObject door;
         public int ID;
+        public bool sceneExit;
 
 
         private void OnEnable()
@@ -40,6 +42,11 @@ namespace LevelManager
                 lvManager.currentRoom = this;
                 lvManager.SpawnEnemies();
                 lvManager.doorOpen = false;
+
+                if (sceneExit)
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                }
             }
            
         }

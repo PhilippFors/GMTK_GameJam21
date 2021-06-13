@@ -18,6 +18,7 @@ namespace LevelManager
         public List<GameObject> instantiatedEnemies;
         public List<GameObject> doors;
         public bool doorOpen = true;
+        public int roomCount;
         
         
         
@@ -64,14 +65,12 @@ namespace LevelManager
                     doors[currentRoom.ID].gameObject.GetComponent<Renderer>().enabled = false;
                     doors[currentRoom.ID].gameObject.GetComponent<Collider>().enabled = false;
                     doorOpen = true;
-                    
+
                 }
                 else
                 {
                     SpawnEnemies();
                 }
-               
-                
             }
         }
 
