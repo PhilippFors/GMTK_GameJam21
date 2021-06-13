@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using General.Utilities;
 using NaughtyAttributes;
@@ -11,6 +12,7 @@ public class CameraShake : SingletonBehaviour<CameraShake>
 
     private Vector3 originalPos;
 
+    public CameraShakeValues test;
     
     public List<CameraShakeValues> valuesList;
     
@@ -70,10 +72,17 @@ public class CameraShake : SingletonBehaviour<CameraShake>
     /// </summary>
     private float seed;
 
+    private Action shakeCam;
 
+    [Button()]
+    public void TestShake()
+    {
+        ActivateShake(test);
+    }
+   
     public void ActivateShake(CameraShakeValues values)
     {
-        
+        shakeCam += Shake;
         trauma = Mathf.Clamp01(trauma + values.stress);
        
         this.angularShake = values.angularShake;
@@ -82,7 +91,7 @@ public class CameraShake : SingletonBehaviour<CameraShake>
         this.recoverySpeed = values.recoverySpeed;
         this.maximumAngularShake = values.maximumAngularShake;
         this.maximumTranslationShake = values.maximumTranslationShake;
-        Shake();
+        
     }
 
     public void Shake()
@@ -124,7 +133,12 @@ public class CameraShake : SingletonBehaviour<CameraShake>
         else
         {
             trauma = 0;
-          
+            shakeCam -= Shake;
         }
+    }
+
+    private void LateUpdate()
+    {
+        shakeCam?.Invoke();
     }
 }

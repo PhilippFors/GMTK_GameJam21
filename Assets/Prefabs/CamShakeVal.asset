@@ -16,8 +16,8 @@ MonoBehaviour:
   frequency: 25
   traumaExponent: 1
   recoverySpeed: 1
-  angularShake: 0
-  translationShake: 0
+  angularShake: 1
+  translationShake: 1
   maximumAngularShake: {x: 15, y: 15, z: 15}
   maximumTranslationShake: {x: 1, y: 1, z: 1}
   activation: 0
