@@ -13,13 +13,20 @@ namespace Effects
         private void Start()
         {
             soundEffect.loop = loop;
-            PlayEffect();
+            if (playOnStartup)
+            {
+                PlayEffect();
+            }
         }
 
         public override void PlayEffect()
         {
             if (PlayOnCommand)
             {
+                if (soundEffect.isPlaying)
+                {
+                    StopEffect();
+                }
                 soundEffect.Play();
             }
         }

@@ -8,7 +8,7 @@ namespace Entities.Enemy.AI.NormalMan
     {
         public override void Tick(StateMachine stateMachine)
         {
-            var destination = AISteering.AvoidanceSteering(stateMachine.transform.forward, stateMachine);
+            var destination = AISteering.AvoidanceSteering(stateMachine.transform.forward, stateMachine, stateMachine.Player.position);
 
             stateMachine.NavMeshAgent.destination = destination;
 

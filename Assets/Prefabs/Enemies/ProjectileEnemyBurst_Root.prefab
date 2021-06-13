@@ -231,10 +231,10 @@ MonoBehaviour:
   startState: {fileID: 11400000, guid: 4a622dccf2bb35a459a6dd215c1ad2ff, type: 2}
   anyTransitions: []
   obstacleAvoidDistance: 5
-  angleIncrement: 0
-  whiskerAmount: 0
-  mainWhiskerLength: 0
-  secondaryWhiskerLength: 0
+  angleIncrement: 5
+  whiskerAmount: 10
+  mainWhiskerLength: 5
+  secondaryWhiskerLength: 5
 --- !u!114 &5487018136476971924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
     resistance: 0.501
   - damageType: 2
     resistance: 0.653
-  movementSpeed: 2
+  movementSpeed: 3
 --- !u!114 &5487018136476971929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +277,8 @@ MonoBehaviour:
   isShotgun: 0
   verticalShotgunSpread: 0.01
   horizontalShotgunSpread: 0.4
+  chaseTime: 6
+  attackTime: 4
 --- !u!195 &5487018136476971925
 NavMeshAgent:
   m_ObjectHideFlags: 0

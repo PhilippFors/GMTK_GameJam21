@@ -8,32 +8,28 @@ namespace Entities.Enemy.AI.ProjectileMan.States
         [SerializeField] private float minDistance;
         [SerializeField] private float maxDistance;
         [SerializeField] private float findNewPointDistance;
-        [SerializeField] private float newPointTimer;
-        private float currentTimer;
-        private Vector3 currentPoint;
+
         public override void Tick(StateMachine stateMachine)
         {
-            Move(stateMachine);
-            Timer(stateMachine);
+            var att = (ProjectileManAttack) stateMachine.EnemyAttack;
+            Move(stateMachine, att);
         }
 
-
-
-        private void Move(StateMachine stateMachine)
+        private void Move(StateMachine stateMachine, ProjectileManAttack att)
         {
+            var newDest = AISteering.AvoidanceSteering(stateMachine.transform.forward, stateMachine, att.CurrentPoint);
+            stateMachine.NavMeshAgent.destination = newDest;
+            
             var dir = Vector3.zero;
-            if (Vector3.Distance(stateMachine.Player.position, stateMachine.transform.position) > findNewPointDistance || stateMachine.NavMeshAgent.remainingDistance < 0.8f)
+            if (Vector3.Distance(stateMachine.Player.position, stateMachine.transform.position) >
+                findNewPointDistance || stateMachine.NavMeshAgent.remainingDistance < 0.8f)
             {
                 dir = stateMachine.Player.position - stateMachine.transform.position;
-                currentTimer -= newPointTimer;
-                FindPointNearPlayer(stateMachine);
             }
             else
             {
-                dir = currentPoint - stateMachine.transform.position;
+                dir = newDest - stateMachine.transform.position;
             }
-            
-            stateMachine.NavMeshAgent.destination = currentPoint;
             
             dir.y = 0;
 
@@ -44,39 +40,19 @@ namespace Entities.Enemy.AI.ProjectileMan.States
                                            Time.deltaTime);
         }
 
-        private void Timer(StateMachine stateMachine)
-        {
-            if (currentTimer >= newPointTimer)
-            {
-                FindPointNearPlayer(stateMachine);
-                currentTimer -= newPointTimer;
-            }
-            else
-            {
-                currentTimer += Time.deltaTime;
-            }
-        }
-
-        private void FindPointNearPlayer(StateMachine stateMachine)
-        {
-            var player = stateMachine.Player.position;
-
-            var randomXY = Random.insideUnitCircle;
-
-            var randomPos = new Vector3(Random.Range(minDistance, maxDistance) * randomXY.x, 0,
-                Random.Range(minDistance, maxDistance) * randomXY.y) + player;
-
-            currentPoint = randomPos;
-        }
-
         public override void OnStateEnter(StateMachine stateMachine)
         {
+            stateMachine.Animator.Play("Running");
+            stateMachine.Animator.SetBool("isRunning", true);
+            var att = (ProjectileManAttack) stateMachine.EnemyAttack;
             stateMachine.NavMeshAgent.isStopped = false;
-            FindPointNearPlayer(stateMachine);
+            att.FindPointNearPlayer(stateMachine.Player.position, minDistance, maxDistance);
         }
 
         public override void OnStateExit(StateMachine stateMachine)
         {
+            stateMachine.Animator.SetBool("isRunning", false);
+            stateMachine.Animator.Play("Idle");
             stateMachine.NavMeshAgent.isStopped = true;
         }
     }
