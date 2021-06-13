@@ -111,6 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 18
+  redParticleEffect: {fileID: 5571971415705040400, guid: c1db322865a25954ca02fee0a2267198, type: 3}
+  blueParticleEffect: {fileID: 5608134739260332763, guid: 8e4f13380fb235b4387adcb3b9f25713, type: 3}
+  greenParticleEffect: {fileID: 2414570155074425318, guid: 85ce0e53c590b40408482db1d53c87f8, type: 3}
 --- !u!54 &919078325630557241
 Rigidbody:
   m_ObjectHideFlags: 0

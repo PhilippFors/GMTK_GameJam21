@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d70cd3a40c74b6982e3f2e651be7188, type: 3}
   m_Name: CamShakeVal
   m_EditorClassIdentifier: 
-  stress: 1
-  frequency: 25
+  stress: 0.5
+  frequency: 5
   traumaExponent: 1
   recoverySpeed: 1
-  angularShake: 1
+  angularShake: 0
   translationShake: 1
   maximumAngularShake: {x: 15, y: 15, z: 15}
   maximumTranslationShake: {x: 1, y: 1, z: 1}

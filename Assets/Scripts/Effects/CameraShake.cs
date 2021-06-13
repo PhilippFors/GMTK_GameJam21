@@ -137,7 +137,7 @@ public class CameraShake : SingletonBehaviour<CameraShake>
         }
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         shakeCam?.Invoke();
     }
