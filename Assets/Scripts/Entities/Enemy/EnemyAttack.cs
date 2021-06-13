@@ -1,6 +1,7 @@
 using System;
 using Entities.Player;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Entities.Enemy
@@ -9,17 +10,36 @@ namespace Entities.Enemy
     {
         public float Damage => damage;
         public float AttackRange => attackRange;
+
+        public float AttackRate
+        {
+            get => attackRate;
+            set
+            {
+                attackRate = value;
+                attackWaitTime = 1f / attackRate;
+            }
+        }
+    
+
         public bool IsAttacking => isAttacking;
-        
+        public bool CanExplodeOnDeath => canExplodeOnDeath;
+        public float ExplodingStrength => explodingStrength;
         [SerializeField] protected float attackRange;
-        [SerializeField] protected float attackRate;
+        [SerializeField] private float attackRate;
         [SerializeField] protected float damage;
 
+        protected bool canExplodeOnDeath;
+        protected float explodingStrength;
         protected bool isAttacking;
         protected bool canAttack;
         private float attackWaitTime;
         private float currentTimer;
         protected Animator animator;
+        
+        protected float oldValue;
+        protected bool initOldValue;
+        protected Dictionary<string, Coroutine> effects = new Dictionary<string, Coroutine>();
 
         private void Awake()
         {
@@ -52,7 +72,15 @@ namespace Entities.Enemy
         {
             currentTimer = 0;
         }
-        
+
         public abstract void Attack();
+
+        public abstract void SlowEffect(float strength, float time);
+
+        public abstract void DamageOverTime(float strength, float time);
+
+        public abstract void ExplodingEnemy(float strength, float time);
+
+        public abstract void Knockback(float strength);
     }
 }

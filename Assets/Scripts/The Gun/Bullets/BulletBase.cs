@@ -54,6 +54,7 @@ namespace TheGun.Bullets
                     var enemy = other.GetComponent<EnemyBase>();
                     var dmg = damage * CalculateDamageMultiplier(enemy);
                     Debug.Log($"Damage: {dmg}");
+                    statusEffectAttachment.ApplyEffect(enemy);
                     enemy.TakeDamage(dmg);
                     DestroyBullet();
                 }
@@ -90,14 +91,6 @@ namespace TheGun.Bullets
 
             Debug.Log($" Multiplier: {tempMultiplier}");
             return tempMultiplier;
-        }
-
-        private void ApplyStatusEffect(EnemyBase enemy)
-        {
-            if (statusEffectAttachment.DamageType == enemy.DamageType)
-            {
-                statusEffectAttachment.ApplyEffect(enemy);
-            }
         }
 
         public void Initialize(Vector3 forward, float dmg, StatusEffectAttachment statusEffectAttachment,

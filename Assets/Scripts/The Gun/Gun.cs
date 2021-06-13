@@ -1,4 +1,5 @@
 using Attachments;
+using Effects;
 using Entities.Player.PlayerInput;
 using ObjectPool;
 using UnityEngine;
@@ -17,9 +18,11 @@ namespace TheGun
         private float currentTimer = 0;
         private bool canShoot;
 
+        [SerializeField] private SoundEffectController sfx;
         private void Awake()
         {
             PlayerInputController.Instance.LeftMouseButton.Started += ctx => ShootSemi();
+            
         }
 
         private void Update()
@@ -42,7 +45,6 @@ namespace TheGun
         {
             if (!isSemiAuto && IsLMBPressed && canShoot)
             {
-                Debug.Log("Shoot auto");
                 currentTimer -= fireRate;
                 ShootBullet();
             }
@@ -71,6 +73,7 @@ namespace TheGun
 
         private void ShootBullet()
         {
+            sfx.PlayEffect();
             var bullet = BulletBasePool.Instance.GetObject();
             bullet.transform.position = bulletSpawnPoint.position;
             bullet.gameObject.SetActive(true);

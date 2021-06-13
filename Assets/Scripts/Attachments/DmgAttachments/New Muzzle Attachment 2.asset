@@ -16,4 +16,4 @@ MonoBehaviour:
   attachmentID: {fileID: 0}
   uiSprite: {fileID: 21300000, guid: 0545df4f2d353474ab27b13f4e28ca9c, type: 3}
   dmgMultiplier: 0.3
-  bulletSpeed: 80
+  bulletSpeed: 70

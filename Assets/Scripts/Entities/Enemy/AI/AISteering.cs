@@ -4,16 +4,16 @@ namespace Entities.Enemy.AI
 {
     public static class AISteering
     {
-        public static Vector3 AvoidanceSteering(Vector3 dir, StateMachine controller)
+        public static Vector3 AvoidanceSteering(Vector3 dir, StateMachine controller, Vector3 target)
         {
             RaycastHit hit;
 
             if (!FindObstacle(dir, out hit, controller, false))
             {
-                return controller.Player.position;
+                return target;
             }
 
-            Vector3 targetpos = controller.Player.position;
+            Vector3 targetpos = target;
 
             float angle = Vector3.Angle(dir * Time.deltaTime, hit.normal);
             if (angle > 165f)

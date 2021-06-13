@@ -1,42 +1,39 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Attachments;
 using Attachments.DamageAttachments;
 using Entities.Player.PlayerInput;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using AttachmentBase = System.Net.Mail.AttachmentBase;
 
 namespace Attachments
 {
     public class AttachmentManager : MonoBehaviour
     {
-        public List<MuzzleAttachment> muzzle;
-        public List<StatusEffectAttachment> status;
-        public List<MagazineAttachment> magazine;
+        public List<AttachmentBase> muzzle;
+        public List<AttachmentBase> status;
+        public List<AttachmentBase> magazine;
 
         public List<AttachmentBase> currentAttachments = new List<AttachmentBase>();
         // public Action<int, int> OnAttachmentSwitch;
 
         [SerializeField] private AttachmentUI attachmentUI;
 
-
         public MuzzleAttachment CurrentMuzzle
         {
-            get => muzzle[muzzleCount];
+            get => (MuzzleAttachment)muzzle[muzzleCount];
             set => currentAttachments[0] = value;
         }
 
         public StatusEffectAttachment CurrentStatus
         {
-            get => status[statusCount];
+            get => (StatusEffectAttachment)status[statusCount];
             set => currentAttachments[1] = value;
         }
 
         public MagazineAttachment CurrentMagazine
         {
-            get => magazine[magazineCount];
+            get => (MagazineAttachment) magazine[magazineCount];
             set => currentAttachments[2] = value;
         }
 
@@ -50,18 +47,19 @@ namespace Attachments
             currentAttachments.Add(muzzle[0]);
             currentAttachments.Add(status[0]);
             currentAttachments.Add(magazine[0]);
-            
-            attachmentUI.SwitchUI(0, CurrentStatus);
-            attachmentUI.SwitchUI(1, CurrentMagazine);
-            attachmentUI.SwitchUI(2, CurrentMuzzle);
-            
+
+            attachmentUI.SwitchUI(0, statusCount, status);
+            attachmentUI.SwitchUI(1, magazineCount, magazine);
+            attachmentUI.SwitchUI(2, muzzleCount, muzzle);
+
             attachmentUI.MoveSwitcher(0);
-            
+
             PlayerInputController.Instance.Mousewheel.Performed += ChangeAttachment;
             PlayerInputController.Instance.ChangeSlot.Performed += ctx => ChangeSlot();
         }
 
         private int currentSlot = 0;
+
         private void ChangeSlot()
         {
             currentSlot++;
@@ -70,9 +68,10 @@ namespace Attachments
             {
                 currentSlot = 0;
             }
-            
+
             attachmentUI.MoveSwitcher(currentSlot);
         }
+
         public void ChangeAttachment(InputAction.CallbackContext ctx)
         {
             float z = ctx.ReadValue<float>();
@@ -102,32 +101,24 @@ namespace Attachments
             //     CurrentMuzzle = muzzle[muzzleCount];
             //     attachmentUI.SwitchUI(2, CurrentMuzzle);
             // }   
-            
+
             if (currentSlot == 0)
             {
                 statusCount = checkValue(statusCount, z);
-                ChangeAttachmentInRenderer(1, statusCount);
-                /*if (CurrentStatus is { } && CurrentStatus != status[statusCount])
-                {*/
-                CurrentStatus = status[statusCount];
-                attachmentUI.SwitchUI(currentSlot, CurrentStatus); //}
-                //}
+                CurrentStatus = (StatusEffectAttachment)status[statusCount];
+                attachmentUI.SwitchUI(currentSlot, statusCount, status);
             }
             else if (currentSlot == 1)
             {
                 magazineCount = checkValue(magazineCount, z);
-                ChangeAttachmentInRenderer(2, magazineCount);
-                CurrentMagazine = magazine[magazineCount];
-                attachmentUI.SwitchUI(currentSlot, CurrentMagazine);
+                CurrentMagazine =(MagazineAttachment) magazine[magazineCount];
+                attachmentUI.SwitchUI(currentSlot, magazineCount, magazine);
             }
             else if (currentSlot == 2)
             {
                 muzzleCount = checkValue(muzzleCount, z);
-                ChangeAttachmentInRenderer(0, muzzleCount);
-                /*if (CurrentMuzzle != muzzle[muzzleCount] && muzzle[muzzleCount] != null)
-                {*/
-                CurrentMuzzle = muzzle[muzzleCount];
-                attachmentUI.SwitchUI(currentSlot, CurrentMuzzle);
+                CurrentMuzzle = (MuzzleAttachment) muzzle[muzzleCount];
+                attachmentUI.SwitchUI(currentSlot, muzzleCount, muzzle);
             }
         }
 
