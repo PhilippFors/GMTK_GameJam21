@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Attachments;
 using Attachments.DamageAttachments;
+using Entities.Enemy;
 using Entities.Player.PlayerInput;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 using AttachmentBase = System.Net.Mail.AttachmentBase;
 
 namespace Attachments
@@ -20,6 +22,12 @@ namespace Attachments
         // public Action<int, int> OnAttachmentSwitch;
 
         [SerializeField] private AttachmentUI attachmentUI;
+        
+        
+        public Color startColorOfBullets;
+        public Color currentMuzzleColor;
+        public Color currentStatusColor;
+        public Color currentMagazineColor;
 
 
         public MuzzleAttachment CurrentMuzzle
@@ -50,6 +58,11 @@ namespace Attachments
             currentAttachments.Add(muzzle[0]);
             currentAttachments.Add(status[0]);
             currentAttachments.Add(magazine[0]);
+
+            currentMagazineColor = GetCurrentColor(CurrentMagazine);
+            currentStatusColor = GetCurrentColor(CurrentStatus);
+            currentMuzzleColor = GetCurrentColor(CurrentMuzzle);
+            setColor();
             
             attachmentUI.SwitchUI(0, CurrentStatus);
             attachmentUI.SwitchUI(1, CurrentMagazine);
@@ -110,6 +123,8 @@ namespace Attachments
                 /*if (CurrentStatus is { } && CurrentStatus != status[statusCount])
                 {*/
                 CurrentStatus = status[statusCount];
+                currentStatusColor = GetCurrentColor(CurrentStatus);
+                setColor();
                 attachmentUI.SwitchUI(currentSlot, CurrentStatus); //}
                 //}
             }
@@ -118,6 +133,8 @@ namespace Attachments
                 magazineCount = checkValue(magazineCount, z);
                 ChangeAttachmentInRenderer(2, magazineCount);
                 CurrentMagazine = magazine[magazineCount];
+                currentMagazineColor = GetCurrentColor(CurrentMagazine);
+                setColor();
                 attachmentUI.SwitchUI(currentSlot, CurrentMagazine);
             }
             else if (currentSlot == 2)
@@ -126,7 +143,9 @@ namespace Attachments
                 ChangeAttachmentInRenderer(0, muzzleCount);
                 /*if (CurrentMuzzle != muzzle[muzzleCount] && muzzle[muzzleCount] != null)
                 {*/
-                CurrentMuzzle = muzzle[muzzleCount];
+                CurrentMuzzle = muzzle[muzzleCount]; 
+                currentMuzzleColor = GetCurrentColor(CurrentMuzzle);
+                setColor();
                 attachmentUI.SwitchUI(currentSlot, CurrentMuzzle);
             }
         }
@@ -155,6 +174,30 @@ namespace Attachments
         public void ChangeAttachmentInRenderer(int typeID, int newID)
         {
             // OnAttachmentSwitch.Invoke(typeID, newID);
+        }
+
+        private void Update()
+        {
+           
+        }
+
+
+        private Color GetCurrentColor(AttachmentBase attachment)
+        {
+            Color currentColor = attachment.DamageType switch
+            {
+                DamageType.red => Color.red,
+                DamageType.blue =>  Color.blue,
+                DamageType.green =>  Color.green,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            return currentColor;
+        }
+
+        private void setColor()
+        {
+            startColorOfBullets = (currentMagazineColor + currentMuzzleColor + currentStatusColor) / 3;
+            startColorOfBullets.a = 1;
         }
     }
 }

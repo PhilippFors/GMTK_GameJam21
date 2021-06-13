@@ -12,6 +12,7 @@ namespace TheGun
         [SerializeField] private bool isSemiAuto;
         [SerializeField] private Transform bulletSpawnPoint;
         
+        
         private bool IsLMBPressed => PlayerInputController.Instance.LeftMouseButton.IsPressed;
         private float fireRate;
         private float currentTimer = 0;
