@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using Effects;
 using UnityEngine;
 
 namespace Entities.Enemy
@@ -16,7 +18,11 @@ namespace Entities.Enemy
         [SerializeField] private DamageType damageType;
         [SerializeField] private List<DamageResistance> damageResistances = new List<DamageResistance>();
         [SerializeField] private float movementSpeed;
+        [SerializeField] private SoundEffectController explosion;
+        [SerializeField] private SoundEffectController death;
+        [SerializeField] private GameObject prefab;
         private bool alive = true;
+
         public override void TakeDamage(float dmg)
         {
             currentHealth -= dmg;
@@ -45,14 +51,20 @@ namespace Entities.Enemy
                     if (entity.GetComponent<EnemyBase>() != this)
                     {
                         entity.GetComponent<EntityBase>().TakeDamage(att.ExplodingStrength * att.Damage);
-                        Debug.Log($"Damage to {entity.name}, {att.ExplodingStrength * att.Damage}");
                     }
                 }
 
-                // TODO: Play particle effect
+                Instantiate(prefab);
+                Instantiate(explosion);
             }
 
-            // TODO: Play death animation
+            Instantiate(death);
+            StartCoroutine(ToDestroy());
+        }
+
+        private IEnumerator ToDestroy()
+        {
+            yield return new WaitForSeconds(0.5f);
             Destroy(gameObject);
         }
     }

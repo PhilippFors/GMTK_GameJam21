@@ -18,7 +18,7 @@ namespace Entities.Enemy
                 other.GetComponent<PlayerBase>().TakeDamage(damage);
             }
 
-            if (other.tag != "Enemy")
+            if (other.tag != "Enemy" && GetComponentInParent<EnemyAttack>().IsAttacking)
             {
                 sfx.PlayEffect();
             }
