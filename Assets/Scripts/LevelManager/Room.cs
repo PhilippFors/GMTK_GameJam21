@@ -5,84 +5,48 @@ using Entities.Enemy;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
-using Random = UnityEngine.Random;
+
 
 namespace LevelManager
 {
     public class Room : MonoBehaviour
     {
-        
-        public List<SpawnWaves> wavesList;
-
+        public LevelManager lvManager => LevelManager.Instance;
         public List<SpawnPoints> spawns;
-        
-        private bool roomStarted;
-        public bool roomFinished;
+        public List<SpawnWaves> waves;
+        public GameObject door;
+        public int ID;
 
-        public int waveCount = 0;
-        SpawnWaves currentWave;
 
-        [Button]
-        void SpawnEnemies()
+        private void OnEnable()
         {
-            currentWave = wavesList[waveCount];
-            for (int i = 0; i < currentWave.enemyAmount; i++)
+            foreach (var points in GetComponentsInChildren<SpawnPoints>())
             {
-                if (Random.value < currentWave.heavySpawnRate)
-                {
-                    //wave.currentEnemies.Add();
-                    return;
-                }
-
-                if (Random.value < currentWave.fastSpawnRate)
-                {
-                    //wave.currentEnemies.Add();
-                    return;
-                }
-                currentWave.currentEnemies.Add(currentWave.baseEnemy);
-                
-            }
-
-            foreach (var enemy in currentWave.currentEnemies)
-            {
-               
-                Instantiate(enemy, spawns[Random.Range(0, spawns.Count - 1)].transform);
+                spawns.Add(points);
             }
         }
 
         private void OnDisable()
         {
-            currentWave.currentEnemies.Clear();
-        }
-
-        private void Update()
-        {
-            if (roomStarted)
-            {
-                if (currentWave.currentEnemies.Count == 0 )
-                {
-                    if(waveCount != wavesList.Count)
-                    {
-                        //SpawnEnemies();
-                        waveCount++;
-                    }
-                    else
-                    {
-                        roomFinished = true;
-                    }
-                }
-            }
+            spawns.Clear();
         }
 
         public void OnTriggerEnter(Collider other)
-        {
+        { 
             if(other.CompareTag("Player"))
             {
-                SpawnEnemies();
-                waveCount++;
-                roomStarted = true;
-                LevelManager.Instance.currentRoom = this;
+                door.GetComponent<Renderer>().enabled = true;
+                door.GetComponent<Collider>().enabled = true;
+                lvManager.currentRoom = this;
+                lvManager.SpawnEnemies();
+                lvManager.doorOpen = false;
             }
+           
+        }
+
+        public void OnTriggerExit(Collider other)
+        {
+            
         }
     }
 }
