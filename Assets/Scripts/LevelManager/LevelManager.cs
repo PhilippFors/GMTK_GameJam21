@@ -31,13 +31,14 @@ namespace LevelManager
             {
                 if (Random.value < currentWave.heavySpawnRate)
                 {
-                    //wave.currentEnemies.Add();
+                    currentEnemies.Add(currentWave.fatEnemy);
                     return;
                 }
 
                 if (Random.value < currentWave.fastSpawnRate)
                 {
-                    //wave.currentEnemies.Add();
+                   
+                    currentEnemies.Add(currentWave.FastEnemy);
                     return;
                 }
                 currentEnemies.Add(currentWave.baseEnemy);

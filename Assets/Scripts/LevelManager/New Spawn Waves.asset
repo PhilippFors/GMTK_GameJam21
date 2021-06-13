@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: New Spawn Waves
   m_EditorClassIdentifier: 
   heavySpawnRate: 0
-  fastSpawnRate: 0
-  enemyAmount: 1
+  fastSpawnRate: 1
+  enemyAmount: 3
   baseEnemy: {fileID: 2546880290984102752, guid: 600ac88409e0cc54c8c915ac7d6e7168, type: 3}
   fatEnemy: {fileID: 5487018136476971923, guid: 26806e1777a96ec418d5e2e00ac9ac36, type: 3}
   FastEnemy: {fileID: 5374210545909694513, guid: 88ad10563e867f444897efe42499fb31, type: 3}
