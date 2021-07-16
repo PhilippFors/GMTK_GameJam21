@@ -14,27 +14,29 @@ namespace TheGun.Bullets
     public class BulletBase : MonoBehaviour
     {
         [SerializeField] private float bulletSpeed;
+        [SerializeField] private SoundEffectController prefab;
+        [SerializeField] private AudioClip impactSFX;
+        
         private bool fromEnemy;
         private float damage;
         private float maxExistTime = 3f;
         private float currentExistTime;
         private float baseMultiplier = 0.2f;
-        [SerializeField] private SoundEffectController prefab;
-        [SerializeField] private AudioClip impactSFX;
-        public AttachmentManager manager => PlayerInputController.Instance.GetComponent<AttachmentManager>();
-        public TrailRenderer a => GetComponent<TrailRenderer>();
+
+        private AttachmentManager manager;
+        private TrailRenderer trailRenderer;
        
         private Gradient grad;
         private GradientColorKey[] colorKey;
         private GradientAlphaKey[] alphaKey;
-       
-
+        
         public GameObject redParticleEffect;
         public GameObject blueParticleEffect;
         public GameObject greenParticleEffect;
         private void Start()
         {
-           
+           manager = PlayerInputController.Instance.GetComponent<AttachmentManager>();
+           trailRenderer = GetComponent<TrailRenderer>();
         }
 
         private List<DamageAttachment> damageAttachments
@@ -54,12 +56,11 @@ namespace TheGun.Bullets
 
         private void OnEnable()
         {
-            a.enabled = true;
+            trailRenderer.enabled = true;
         }
 
         private void Update()
         {
-           
             MoveBullet();
             if (currentExistTime >= maxExistTime)
             {
@@ -103,7 +104,6 @@ namespace TheGun.Bullets
                 if (other.gameObject.tag == "Player")
                 {
                     var player = other.GetComponent<PlayerBase>();
-                    Debug.Log($"Damage: {damage}");
                     //Instantiate(particleEffectPrefab, transform).GetComponent<ParticleSystem>().Play();
                     Instantiate(redParticleEffect, transform.position, Quaternion.identity);
                     player.TakeDamage(damage);
@@ -111,7 +111,7 @@ namespace TheGun.Bullets
                 }
             }
             
-            if (!fromEnemy && muzzleAttachment != null && !other.GetComponent<BulletBase>() && muzzleAttachment.DamageType == DamageType.red)
+            if (!fromEnemy && muzzleAttachment != null && muzzleAttachment.DamageType == DamageType.red)
             {
                 var enemies = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("Enemy"));
                 if (enemies.Length > 0)
@@ -180,10 +180,10 @@ namespace TheGun.Bullets
 
             b.color = grad;*/
             
-            
-            a.time = 0.1f;
-            a.startColor = manager.startColorOfBullets;
-            a.endColor = manager.startColorOfBullets;
+            trailRenderer.Clear();
+            trailRenderer.time = 0.1f;
+            trailRenderer.startColor = manager.startColorOfBullets;
+            trailRenderer.endColor = manager.startColorOfBullets;
             damage = dmg;
             bulletSpeed = muzzleAttachment.BulletSpeed;
             this.statusEffectAttachment = statusEffectAttachment;
@@ -209,14 +209,9 @@ namespace TheGun.Bullets
         {
             fromEnemy = false;
             currentExistTime = 0;
-            a.time = 0;
-            a.enabled = false;
+            trailRenderer.time = 0;
+            trailRenderer.enabled = false;
             BulletBasePool.Instance.ReleaseObject(this);
-        }
-
-        private void OnDestroy()
-        {
-           
         }
     }
 }

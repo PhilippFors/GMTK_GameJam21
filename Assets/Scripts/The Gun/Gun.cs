@@ -23,7 +23,7 @@ namespace TheGun
         private void Awake()
         {
             PlayerInputController.Instance.LeftMouseButton.Started += ctx => ShootSemi();
-            PlayerInputController.Instance.LeftMouseButton.Canceled += ctx => animator.SetLayerWeight(1, 0);
+            // PlayerInputController.Instance.LeftMouseButton.Canceled += ctx => animator.SetLayerWeight(1, 0);
         }
 
         private void Update()

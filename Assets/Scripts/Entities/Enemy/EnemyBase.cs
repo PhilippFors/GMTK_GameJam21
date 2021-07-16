@@ -30,8 +30,8 @@ namespace Entities.Enemy
             {
                 if (alive)
                 {
-                    OnDeath();
                     alive = false;
+                    OnDeath();
                 }
             }
         }

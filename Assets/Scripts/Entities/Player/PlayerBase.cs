@@ -15,7 +15,6 @@ namespace Entities.Player
             CameraShake.Instance.ActivateShake(cameraShakeValues);
             if(currentHealth <= 0)
                 OnDeath();
-            Debug.Log($"Player takes {dmg} damage");
         }
 
         public override void Heal(float value)
@@ -26,7 +25,7 @@ namespace Entities.Player
         [Button()]
         public override void OnDeath()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
