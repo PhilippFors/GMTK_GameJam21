@@ -7,7 +7,6 @@ namespace Effects
     [System.Serializable]
     public class SoundEffectController : IEffectController
     {
-        
         [SerializeField] private AudioSource soundEffect;
         [SerializeField] private bool playOnStartup;
         [SerializeField] private bool destroyOnFinish;
